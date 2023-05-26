@@ -1,0 +1,39 @@
+
+  Welcome to Battleship - terminal game against bot!
+
+  PREPARATION FOR BATTLE
+
+  Both you and your opponent have 10x10 grid and fleet of 10 ships:
+    1 x battleship - 4 cells
+    2 x cruisers   - 3 cells each
+    3 x destroyers - 2 cells each
+    4 x submarines - 1 cell each
+
+  First, you need to place your ships.
+
+  Use arrows to move cursor around the grid,
+  <Enter> to place current ship,
+  <Space> to rotate it.
+
+  Rules for placing ships:
+  - Each ship occupies a number of adjacent cells on the grid, horizontally
+    or vertically.
+  - Ships can't touch each other with sides and corners.
+
+  HOW TO PLAY
+
+  The application randomly choose whose move is the first and then the battle
+  begin.
+  You and your opponent alternate turns, choosing a cell on the opponent's
+  field and hitting it. If a player hits the ship, the next move does not pass
+  to the opponent.
+
+  Your goal is to sink all of the opponent's ships before your fleet is
+  destroyed.
+
+  Use arrows to move around bot field and <Enter> to hit.
+  The application will notify you if you missed, damaged or destroyed the ship
+  of opponent.
+
+  Have fun!
+
