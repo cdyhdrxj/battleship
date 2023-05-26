@@ -21,6 +21,7 @@ typedef struct _game {
     help *h;
 } game;
 
+void print_grid(game *g);
 void init_help(help *h);
 void print_help(help *h);
 

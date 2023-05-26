@@ -1,6 +1,33 @@
 #include "init.h"
 
 
+void print_grid(game *g) {
+    g->bot = newwin(21, 41, 2, 1); // откуда такие числа?
+    box(g->bot, 0, 0);
+
+    for(int i = 1; i < 20; i++) {
+        if(i % 2 == 0)
+            mvwprintw(g->bot, i, 1, "———————————————————————————————————————");
+        else
+            mvwprintw(g->bot, i, 1, "   |   |   |   |   |   |   |   |   |   ");
+    }
+
+
+    g->pl = newwin(21, 41, 2, 43);
+    box(g->pl, 0, 0);
+
+    for(int i = 1; i < 20; i++) {
+        if(i % 2 == 0)
+            mvwprintw(g->pl, i, 1, "———————————————————————————————————————");
+        else
+            mvwprintw(g->pl, i, 1, "   |   |   |   |   |   |   |   |   |   ");
+    }
+
+    wrefresh(g->bot);
+    wrefresh(g->pl);
+}
+
+
 void init_help(help *h) {
     FILE *f;
     f = fopen("help.txt", "r");
