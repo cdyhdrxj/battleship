@@ -52,3 +52,9 @@ https://keldysh.ru/papers/2015/prep2015_98.pdf
     Приложение возвращается к тому состоянию, которые было до выхода. 
     2. Пользователь выходит ->  
     Приложение закрывается. 
+
+## Диаграммы
+[Общая структура приложения](https://drive.google.com/file/d/1o7abxml6xHxpvFFmxPjE56osIa4eNUco/view?usp=sharing)  
+[Расстановка кораблей пользователем](https://drive.google.com/file/d/13qDv51B6OR1enVYU2bYrpEAoAC0Mrybp/view?usp=sharing)  
+[Генерация поля бота](https://drive.google.com/file/d/16ogiyQDxrGThNgw_9Ubb3Xl94vrWeX5n/view?usp=sharing)  
+[Цикл игры](https://drive.google.com/file/d/1lQTqSxoYcaOeJtxoogk3KP7biA2I1MQB/view?usp=sharing)  
