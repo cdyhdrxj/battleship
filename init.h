@@ -16,6 +16,8 @@ typedef struct _help {
 } help;
 
 typedef struct _game {
+    int user_field[12][12];
+    int bot_field[12][12];
     WINDOW *win, *pl, *bot;
     PANEL *pan;
     help *h;

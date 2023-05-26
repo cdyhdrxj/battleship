@@ -1,4 +1,5 @@
 #include "init.h"
+#include "place_ships.h"
 
 int main(){
     setlocale(LC_ALL, "");
@@ -22,19 +23,9 @@ int main(){
     doupdate();
 
     print_grid(g);
-    init_help(g->h);
+    init_help(g);
 
-    int c;
-    while ((c = wgetch(g->win)) != 'q') {
-        if (c == 'h'){
-            print_help(g->h);
-            top_panel(g->pan);
-            update_panels();
-            doupdate();
-
-            print_grid(g);
-        }
-    }
+    place_ships(g);
 
     endwin();
 
