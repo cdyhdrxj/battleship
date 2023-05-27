@@ -9,5 +9,7 @@
 #include "init.h"
 
 void place_ships(game *g);
+void print_ships(game *g);
+
 
 #endif /* PLACE_SHIPS_H */
