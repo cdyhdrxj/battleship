@@ -3,16 +3,16 @@
 
 // название не очень
 static void print_current_state(game *g, int x, int y) {
-    mvwprintw(g->bot, 2*x-1, 4*y-2-1, " ");
-    mvwprintw(g->bot, 2*x-1, 4*y-2+1, " ");
+    mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)-1, " ");
+    mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)+1, " ");
     if (g->bot_shot[x][y] == 1) {
         if (g->bot_field[x][y] == 1)
-            mvwprintw(g->bot, 2*x-1, 4*y-2, "x");
+            mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), "x");
         else
-            mvwprintw(g->bot, 2*x-1, 4*y-2, ".");
+            mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), ".");
     }
     else
-        mvwprintw(g->bot, 2*x-1, 4*y-2, " ");
+        mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), " ");
 }
 
 
@@ -24,8 +24,8 @@ static void print_shot(game *g) {
 
 
 static void print_current_cell(game *g, int x, int y) {
-    mvwprintw(g->bot, 2*x-1, 4*y-2-1, ">");
-    mvwprintw(g->bot, 2*x-1, 4*y-2+1, "<");
+    mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)-1, ">");
+    mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)+1, "<");
 }
 
 
@@ -41,6 +41,13 @@ void shooting_loop(game *g) {
     wrefresh(g->bot);
 
     while (cells_left > 0) {
+        wmove(g->win, LINES - 1, 0);
+        wclrtoeol(g->win);
+        wattron(g->win, A_REVERSE);
+        mvwprintw(g->win, LINES - 1, 0, TURN_MSG);
+        wattroff(g->win, A_REVERSE);
+        wrefresh(g->win);
+        
         int c = getch();
         switch(c) {
             case KEY_DOWN:
@@ -73,13 +80,20 @@ void shooting_loop(game *g) {
 
             case 10: // enter
                 if (g->bot_field[x][y] == 1) {
-                    mvwprintw(g->bot, 2*x-1, 4*y-2, "x");
-                    if (g->bot_shot[x][y] == 0)
+                    mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), "x");
+                    if (g->bot_shot[x][y] == 0){
+                        wmove(g->win, LINES - 1, 0);
+                        wclrtoeol(g->win);
+                        wattron(g->win, A_REVERSE);
+                        mvwprintw(g->win, LINES - 1, 0, HIT_MSG);
+                        wattroff(g->win, A_REVERSE);
+                        wrefresh(g->win);
                         cells_left--;
+                    }
                     //else
                 }
                 else {
-                    mvwprintw(g->bot, 2*x-1, 4*y-2, ".");
+                    mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), ".");
                 }
                 g->bot_shot[x][y] = 1;
                 break;

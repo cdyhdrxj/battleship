@@ -4,13 +4,15 @@
 void print_grid(game *g) {
     char *sep   = "———————————————————————————————————————";
     char *cells = "   |   |   |   |   |   |   |   |   |   ";
-    //char *lbl1 = "Bot";
-    //char *lbl2 = "You";
+    char *lbl1 = "Bot";
+    char *lbl2 = "You";
+
+    int bot_x = 1, bot_y = 1;
 
     int field_wigth = strlen(cells) + 2; // + 2 границы 
     int field_heigth = 10 + 11; // 10 клеток + 11 границ
 
-    g->bot = newwin(field_heigth, field_wigth, 2, 1); 
+    g->bot = newwin(field_heigth, field_wigth, bot_x, bot_y); 
     box(g->bot, 0, 0);
 
     for(int i = 1; i < field_heigth - 1; i++) {
@@ -21,7 +23,7 @@ void print_grid(game *g) {
     }
 
 
-    g->pl = newwin(field_heigth, field_wigth, 2, field_wigth + 2);
+    g->pl = newwin(field_heigth, field_wigth, bot_x, bot_y + field_wigth + 1);
     box(g->pl, 0, 0);
 
     for(int i = 1; i < field_heigth - 1; i++) {
@@ -34,8 +36,11 @@ void print_grid(game *g) {
     wrefresh(g->bot);
     wrefresh(g->pl);
 
+    mvwprintw(g->win, 0, (field_wigth - strlen(lbl1)) / 2, "%s", lbl1);
+    mvwprintw(g->win, 0, bot_y + field_wigth + 1 + (field_wigth - strlen(lbl2)) / 2, "%s", lbl2);
+
     wattron(g->win, A_REVERSE);
-    mvwprintw(g->win, LINES - 1, 0, "Press h to get help, q to quit");
+    mvwprintw(g->win, LINES - 1, 0, "%s", MAIN_MSG);
     wattroff(g->win, A_REVERSE);
 
     wrefresh(g->win);
@@ -82,7 +87,7 @@ void print_help(help *h) {
     wclear(h->win);
     mvwprintw(h->win, 0, 0, "%s", h->text);
     attron(A_REVERSE);
-    mvprintw(LINES - 1, 0, "Help (press q to quit, arrows to scroll)");
+    mvprintw(LINES - 1, 0, "%s", HELP_MSG);
     attroff(A_REVERSE);
     refresh();
 }

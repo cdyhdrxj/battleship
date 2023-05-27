@@ -3,7 +3,7 @@
 
   PREPARATION FOR BATTLE
 
-  Both you and your opponent have 10x10 grid and fleet of 10 ships:
+  Both you and your opponent have 10x10 grid and a fleet of 10 ships:
     1 x battleship - 4 cells
     2 x cruisers   - 3 cells each
     3 x destroyers - 2 cells each
@@ -11,7 +11,7 @@
 
   First, you need to place your ships.
 
-  Use arrows to move cursor around the grid,
+  Use arrows to move the cursor around the grid,
   <Enter> to place current ship,
   <Space> to rotate it.
 

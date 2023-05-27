@@ -9,21 +9,21 @@ static void ship_down(game *g, int *x_gl, int *y_gl, int orient, int size) {
         if(x < 10){
             *x_gl += 1; x++;
             for(int i = 0; i < size; i++){
-                mvwprintw(g->pl, 2*x-1, 4*(y+i)-2, "o");
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+i), "o");
                 if(!g->user_field[x-1][y+i])
-                    mvwprintw(g->pl, 2*(x-1)-1, 4*(y+i)-2, " ");
+                    mvwprintw(g->pl, FIELD_X(x-1), FIELD_Y(y+i), " ");
                 else
-                    mvwprintw(g->pl, 2*(x-1)-1, 4*(y+i)-2, "x");
+                    mvwprintw(g->pl, FIELD_X(x-1), FIELD_Y(y+i), "x");
             }
         }
     }
     else {
         if(x + size <= 10){
-            mvwprintw(g->pl, 2*(x+size)-1, 4*y-2, "o");
+            mvwprintw(g->pl, FIELD_X(x+size), FIELD_Y(y), "o");
             if(!g->user_field[x][y])
-                mvwprintw(g->pl, 2*x-1, 4*y-2, " ");
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y), " ");
             else
-                mvwprintw(g->pl, 2*x-1, 4*y-2, "x");
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y), "x");
             *x_gl += 1;
         } 
     }
@@ -38,22 +38,22 @@ static void ship_up(game *g, int *x_gl, int *y_gl, int orient, int size) {
         if(x > 1){
             *x_gl -= 1; x--;
             for(int i = 0; i < size; i++){
-                mvwprintw(g->pl, 2*x-1, 4*(y+i)-2, "o");
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+i), "o");
                 if(!g->user_field[x+1][y+i])
-                    mvwprintw(g->pl, 2*(x+1)-1, 4*(y+i)-2, " ");
+                    mvwprintw(g->pl, FIELD_X(x+1), FIELD_Y(y+i), " ");
                 else
-                    mvwprintw(g->pl, 2*(x+1)-1, 4*(y+i)-2, "x");
+                    mvwprintw(g->pl, FIELD_X(x+1), FIELD_Y(y+i), "x");
             }
         }
     }
     else {
         if(x > 1){
             *x_gl -= 1; x--;
-            mvwprintw(g->pl, 2*x-1, 4*y-2, "o");
+            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y), "o");
             if(!g->user_field[x+size][y])
-                mvwprintw(g->pl, 2*(x+size)-1, 4*y-2, " ");
+                mvwprintw(g->pl, FIELD_X(x+size), FIELD_Y(y), " ");
             else
-                mvwprintw(g->pl, 2*(x+size)-1, 4*y-2, "x");
+                mvwprintw(g->pl, FIELD_X(x+size), FIELD_Y(y), "x");
         } 
     }
 }
@@ -66,22 +66,22 @@ static void ship_left(game *g, int *x_gl, int *y_gl, int orient, int size) {
     if(orient == 0) {
         if(y > 1){
             *y_gl -= 1; y--;
-            mvwprintw(g->pl, 2*x-1, 4*y-2, "o");
+            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y), "o");
             if(!g->user_field[x][y+size])
-                mvwprintw(g->pl, 2*x-1, 4*(y+size)-2, " ");
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+size), " ");
             else
-                mvwprintw(g->pl, 2*x-1, 4*(y+size)-2, "x");
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+size), "x");
         } 
     }
     else {
         if(y > 1){
             *y_gl -= 1; y--;
             for(int i = 0; i < size; i++){
-                mvwprintw(g->pl, 2*(x+i)-1, 4*y-2, "o");
+                mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y), "o");
                 if(!g->user_field[x+i][y+1])
-                    mvwprintw(g->pl, 2*(x+i)-1, 4*(y+1)-2, " ");
+                    mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y+1), " ");
                 else
-                    mvwprintw(g->pl, 2*(x+i)-1, 4*(y+1)-2, "x");
+                    mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y+1), "x");
             }
         }
     }
@@ -94,11 +94,11 @@ static void ship_right(game *g, int *x_gl, int *y_gl, int orient, int size) {
 
     if(orient == 0) {
         if(y + size <= 10){
-            mvwprintw(g->pl, 2*x-1, 4*(y+size)-2, "o");
+            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+size), "o");
             if(!g->user_field[x][y])
-                mvwprintw(g->pl, 2*x-1, 4*y-2, " ");
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y), " ");
             else
-                mvwprintw(g->pl, 2*x-1, 4*y-2, "x"); 
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y), "x"); 
             *y_gl += 1; y++;
         }  
     }
@@ -106,11 +106,11 @@ static void ship_right(game *g, int *x_gl, int *y_gl, int orient, int size) {
         if(y < 10){
             *y_gl += 1; y++;
             for(int i = 0; i < size; i++){
-                mvwprintw(g->pl, 2*(x+i)-1, 4*y-2, "o");
+                mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y), "o");
                 if(!g->user_field[x+i][y-1])
-                    mvwprintw(g->pl, 2*(x+i)-1, 4*(y-1)-2, " ");
+                    mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y-1), " ");
                 else
-                    mvwprintw(g->pl, 2*(x+i)-1, 4*(y-1)-2, "x");
+                    mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y-1), "x");
             }
         }
     }
@@ -122,16 +122,18 @@ static void ship_rotate(game *g, int x, int y, int *orient_gl, int size) {
         if(x + size - 1 <= 10){
             *orient_gl = !(*orient_gl);
             for(int i = 1; i < size; i++){
-                mvwprintw(g->pl, 2*(x+i)-1, 4*y-2, "o");
+                mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y), "o");
                 if(!g->user_field[x][y+i])
-                    mvwprintw(g->pl, 2*x-1, 4*(y+i)-2, " ");
+                    mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+i), " ");
                 else
-                    mvwprintw(g->pl, 2*x-1, 4*(y+i)-2, "x");
+                    mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+i), "x");
             }
         }
         else{
+            wmove(g->win, LINES - 1, 0);
+            wclrtoeol(g->win);
             wattron(g->win, A_REVERSE);
-            mvwprintw(g->win, LINES - 2, 0, "Can't rotate");
+            mvwprintw(g->win, LINES - 1, 0, ROTATE_MSG);
             wattroff(g->win, A_REVERSE);
             wrefresh(g->win);
         }
@@ -140,16 +142,18 @@ static void ship_rotate(game *g, int x, int y, int *orient_gl, int size) {
         if(y + size - 1 <= 10){
             *orient_gl = !(*orient_gl);
             for(int i = 1; i < size; i++){
-                mvwprintw(g->pl, 2*x-1, 4*(y+i)-2, "o");
+                mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+i), "o");
                 if(!g->user_field[x+i][y])
-                    mvwprintw(g->pl, 2*(x+i)-1, 4*y-2, " ");
+                    mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y), " ");
                 else
-                    mvwprintw(g->pl, 2*(x+i)-1, 4*y-2, "x");
+                    mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y), "x");
             }
         }
         else{
+            wmove(g->win, LINES - 1, 0);
+            wclrtoeol(g->win);
             wattron(g->win, A_REVERSE);
-            mvwprintw(g->win, LINES - 2, 0, "Can't rotate");
+            mvwprintw(g->win, LINES - 1, 0, ROTATE_MSG);
             wattroff(g->win, A_REVERSE);
             wrefresh(g->win);
         }
@@ -168,8 +172,10 @@ static int ship_place(game *g, int x, int y, int orient, int size) {
         }
 
         if (flag == 0){
+            wmove(g->win, LINES - 1, 0);
+            wclrtoeol(g->win);
             wattron(g->win, A_REVERSE);
-            mvwprintw(g->win, LINES - 2, 0, "Move this ship");
+            mvwprintw(g->win, LINES - 1, 0, MOVE_MSG);
             wattroff(g->win, A_REVERSE);
             wrefresh(g->win);
             return 0;
@@ -177,7 +183,7 @@ static int ship_place(game *g, int x, int y, int orient, int size) {
         
         for(int i = 0; i < size; i++){
             g->user_field[x][y+i] = 1;
-            mvwprintw(g->pl, 2*x-1, 4*(y+i)-2, "x");
+            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+i), "x");
 
         }
     }
@@ -191,8 +197,10 @@ static int ship_place(game *g, int x, int y, int orient, int size) {
         }
 
         if (flag == 0){
+            wmove(g->win, LINES - 1, 0);
+            wclrtoeol(g->win);
             wattron(g->win, A_REVERSE);
-            mvwprintw(g->win, LINES - 2, 0, "Move this ship");
+            mvwprintw(g->win, LINES - 1, 0, MOVE_MSG);
             wattroff(g->win, A_REVERSE);
             wrefresh(g->win);
             return 0;
@@ -200,7 +208,7 @@ static int ship_place(game *g, int x, int y, int orient, int size) {
         
         for(int i = 0; i < size; i++){
             g->user_field[x+i][y] = 1;  
-            mvwprintw(g->pl, 2*(x+i)-1, 4*y-2, "x");
+            mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y), "x");
         }
     }
     return 1;
@@ -211,20 +219,20 @@ void print_ships(game *g) {
     for (int i = 1; i <= 10; i++)
         for (int j = 1; j <= 10; j++)
             if (g->user_field[i][j] == 1)
-                mvwprintw(g->pl, 2*i-1, 4*j-2, "x");
+                mvwprintw(g->pl, FIELD_X(i), FIELD_Y(j), "x");
             else
-                mvwprintw(g->pl, 2*i-1, 4*j-2, " ");
+                mvwprintw(g->pl, FIELD_X(i), FIELD_Y(j), " ");
 }
 
 
 static void print_current_ship(game *g, int x, int y, int orient, int size) {
     if (orient == 0) {
         for(int i = 0; i < size; i++)
-            mvwprintw(g->pl, 2*x-1, 4*(y+i)-2, "o");
+            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+i), "o");
     }
     else {
         for(int i = 0; i < size; i++)
-            mvwprintw(g->pl, 2*(x+i)-1, 4*y-2, "o");
+            mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y), "o");
     }
 }
 
@@ -248,6 +256,13 @@ void place_ships(game *g) {
     int c;
     while(current_ship < 10) {
         c = getch();
+        wmove(g->win, LINES - 1, 0);
+        wclrtoeol(g->win);
+        wattron(g->win, A_REVERSE);
+        mvwprintw(g->win, LINES - 1, 0, "%s", MAIN_MSG);
+        wattroff(g->win, A_REVERSE);
+        wrefresh(g->win);
+
         switch(c) {
             case KEY_DOWN:
                 ship_down(g, &x, &y, orientation, size[current_ship]);
@@ -272,10 +287,6 @@ void place_ships(game *g) {
             case 10: // enter
                 if (!ship_place(g, x, y, orientation, size[current_ship]))
                     break;
-
-                wmove(g->win, LINES-2, 0);
-                wclrtoeol(g->win);
-                wrefresh(g->win);  
 
                 current_ship++;
                 if(current_ship == 10)
