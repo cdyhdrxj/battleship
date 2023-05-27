@@ -3,6 +3,7 @@
 
 void place_ships(game *g) {
     keypad(g->pl, TRUE);
+    curs_set(0);
 
     int size[] = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
     int current_ship = 0;
@@ -224,7 +225,7 @@ void place_ships(game *g) {
                 break;
 
             case 'h':
-                print_help(g->h);
+                help_loop(g->h);
                 top_panel(g->pan);
                 update_panels();
                 doupdate();

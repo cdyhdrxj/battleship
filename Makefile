@@ -1,2 +1,2 @@
 main:
-	gcc main.c init.c place_ships.c -o out -lncursesw -lpanelw
+	gcc main.c init.c place_ships.c -o out -lncursesw -lpanelw -Werror -Wall -Wextra
