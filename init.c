@@ -4,6 +4,8 @@
 void print_grid(game *g) {
     char *sep   = "———————————————————————————————————————";
     char *cells = "   |   |   |   |   |   |   |   |   |   ";
+    //char *lbl1 = "Bot";
+    //char *lbl2 = "You";
 
     int field_wigth = strlen(cells) + 2; // + 2 границы 
     int field_heigth = 10 + 11; // 10 клеток + 11 границ
@@ -31,6 +33,12 @@ void print_grid(game *g) {
 
     wrefresh(g->bot);
     wrefresh(g->pl);
+
+    wattron(g->win, A_REVERSE);
+    mvwprintw(g->win, LINES - 1, 0, "Press h to get help, q to quit");
+    wattroff(g->win, A_REVERSE);
+
+    wrefresh(g->win);
 }
 
 
@@ -122,7 +130,7 @@ void help_loop(help *h) {
     curs_set(0);
 
     int c;
-    while((c = wgetch(h->win)) != 'q') {
+    while((c = getch()) != 'q') {
         switch(c) {
             case KEY_UP:
                 if (mypadpos >= 0)
