@@ -1,6 +1,7 @@
 #include "init.h"
 #include "place_ships.h"
 #include "generate_bot_field.h"
+#include "shoot.h"
 
 int main(){
     setlocale(LC_ALL, "");
@@ -33,22 +34,9 @@ int main(){
 
     place_ships(g);
 
-    int c;
-    while((c = getch()) != 'q') {
-        if(c == 10){
-            for(int i = 1; i <= 10; i++)
-                for(int j = 1; j <= 10; j++)
-                    mvwprintw(g->bot, 2*i-1, 4*j-2, " ");
+    gener_field(g->bot_field);
 
-            gener_field(g->bot_field);
-
-            for(int i = 1; i <= 10; i++)
-                for(int j = 1; j <= 10; j++)
-                    if(g->bot_field[i][j])
-                        mvwprintw(g->bot, 2*i-1, 4*j-2, "x");
-            wrefresh(g->bot);
-        }
-    }
+    shooting_loop(g);
 
     endwin();
 

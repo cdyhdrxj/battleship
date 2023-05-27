@@ -299,7 +299,6 @@ void place_ships(game *g) {
 
             case 'q':
                 return;
-                break;
 
             case KEY_RESIZE:
                 endwin();
