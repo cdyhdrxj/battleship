@@ -35,6 +35,7 @@ int main(){
     place_ships(g);
 
     gener_field(g->bot_field);
+    fill_bot_ships(g);
 
     shooting_loop(g);
 

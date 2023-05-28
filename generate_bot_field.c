@@ -1,46 +1,55 @@
 #include "generate_bot_field.h"
 
-static void snake(int field[][12]){
-    int var = rand() % 2;
 
+static void snake(int field[][12]){
     int a, b;
 
-    if(var)
+    if(rand() % 2)
         a = 4;
     else
         a = 5;
 
-    var = rand() % 2;
-
-    if(var)
+    if(rand() % 2)
         b = 5;
     else
         b = 6;
 
-    for(int i = 1; i <= 8; i++)
-        if(i != a)
-            field[i][1] = 1;
+    int current_ship = 1;
 
-    for(int j = 3; j <= 8; j++)
-        if(j != b)
-            field[1][j] = 1;
+    for(int i = 1; i <= 8; i++){
+        if(i == a){
+            current_ship++;
+            continue;  
+        }
+        
+        field[i][1] = current_ship;
+    }
 
+    current_ship++;
 
-    field[10][1] = 1;
-    field[10][2] = 1;
-    field[1][10] = 1;
-    field[2][10] = 1;
+    for(int j = 3; j <= 8; j++){
+        if(j == b){
+            current_ship++;
+            continue;
+        }
 
+        field[1][j] = current_ship;
+    }
+
+    current_ship++;
+    field[10][1] = current_ship;
+    field[10][2] = current_ship;
+    current_ship++;
+    field[1][10] = current_ship;
+    field[2][10] = current_ship;
 }
 
 
 static void line(int field[][12]) {
-    int var = rand() % 3;
-
     int row1, row2;
     int a1, a2, b1, b2;
 
-    switch(var){
+    switch(rand() % 3){
         case 0:
             row1 = 1;
             row2 = 3;
@@ -55,9 +64,7 @@ static void line(int field[][12]) {
             break;
     }
 
-    var = rand() % 3;
-
-    switch(var){
+    switch(rand() % 3){
         case 0:
             a1 = 5;
             a2 = 8;
@@ -72,9 +79,7 @@ static void line(int field[][12]) {
             break;
     }
 
-    var = rand() % 3;
-
-    switch(var){
+    switch(rand() % 3){
         case 0:
             b1 = 4;
             b2 = 8;
@@ -89,12 +94,46 @@ static void line(int field[][12]) {
             break;
     }
 
-    for(int j = 1; j <= 10; j++){
-        if(j != a1 && j != a2)
-            field[row1][j] = 1;
+    int current_ship = 1;
 
-        if(j != b1 && j != b2)
-            field[row2][j] = 1;
+    for(int j = 1; j <= 10; j++){
+        if(j == a1 || j == a2){
+            current_ship++;
+            continue;
+        }
+
+        field[row1][j] = current_ship;            
+    }
+
+    current_ship++;
+
+    for(int j = 1; j <= 10; j++) {
+        if(j == b1 || j == b2){
+            current_ship++;
+            continue;
+        }
+
+        field[row2][j] = current_ship; 
+    }
+}
+
+
+void fill_bot_ships(game *g) {
+    for (int i = 0; i < 10; i++) {
+        g->bot_ships[i].num = i+1;
+        g->bot_ships[i].size = 0;
+        g->bot_ships[i].hit_cells = 0;
+    }
+
+
+    for (int i = 0; i < 12; i++) {
+        for (int j = 0; j < 12; j++) {
+            if (g->bot_field[i][j] == 0)
+                continue;
+
+            int current_ship = g->bot_field[i][j];
+            g->bot_ships[current_ship-1].size += 1;
+        }
     }
 }
 
@@ -112,7 +151,7 @@ void gener_field(int field[][12]){
     else
         snake(f);
 
-    for(int i = 0; i < 4; i++){
+    for(int i = 7; i <= 10; i++){
         int flag = 1;
         int x, y;
         while(flag){
@@ -122,11 +161,11 @@ void gener_field(int field[][12]){
 
             for(int j = x-1; j <= x+1; j++)
                 for(int k = y-1; k <= y+1; k++)
-                     if(f[j][k] == 1)
+                     if(f[j][k] > 0)
                         flag = 1;
             }
 
-            f[x][y] = 1;
+            f[x][y] = i;
         }
 
     int d1 = (rand() % 2) * 11;

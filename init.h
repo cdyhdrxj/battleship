@@ -22,15 +22,29 @@
 #define LOSE_MSG    "You lose... (press any key to quit)"
 
 
+typedef struct __ship {
+    int num;
+    int size;
+    int hit_cells;
+} ship;
+
+
 typedef struct _help {
     WINDOW *win;
     PANEL *pan;
     char *text;
 } help;
 
+
 typedef struct _game {
-    int user_field[12][12]; int user_shot[12][12];
-    int bot_field[12][12]; int bot_shot[12][12];
+    int user_field[12][12]; 
+    int user_shot[12][12];
+    
+
+    int bot_field[12][12];
+    int bot_shot[12][12];
+    ship bot_ships[10];
+
     WINDOW *win, *pl, *bot;
     PANEL *pan;
     help *h;
