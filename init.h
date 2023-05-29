@@ -23,10 +23,19 @@
 
 
 typedef struct __ship {
-    int num;
     int size;
     int hit_cells;
 } ship;
+
+
+typedef struct __shoot {
+    int cells_left;
+    int battleship_search;
+    int diagonals;
+    int is_destroyed;
+    int current_ship;
+    int poss_cell[4][2];
+} shoot;
 
 
 typedef struct _help {
@@ -39,16 +48,19 @@ typedef struct _help {
 typedef struct _game {
     int user_field[12][12]; 
     int user_shot[12][12];
-    
+    ship user_ships[10];    
 
     int bot_field[12][12];
     int bot_shot[12][12];
     ship bot_ships[10];
 
+    shoot bot_shoot;
+
     WINDOW *win, *pl, *bot;
     PANEL *pan;
     help *h;
 } game;
+
 
 void print_grid(game *g);
 int init_help(help *h);

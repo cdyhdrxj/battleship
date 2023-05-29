@@ -161,12 +161,12 @@ static void ship_rotate(game *g, int x, int y, int *orient_gl, int size) {
 }
 
 
-static int ship_place(game *g, int x, int y, int orient, int size) {
+static int ship_place(game *g, int x, int y, int orient, int size, int current_ship) {
     if(orient == 0) {
         int flag = 1;
         for (int row = x-1; row <= x+1; row++) {
             for (int col = y-1; col <= y + size; col++) {
-                if (g->user_field[row][col] == 1)
+                if (g->user_field[row][col] != 0)
                     flag = 0;
             }
         }
@@ -180,9 +180,9 @@ static int ship_place(game *g, int x, int y, int orient, int size) {
             wrefresh(g->win);
             return 0;
         }
-        
+
         for(int i = 0; i < size; i++){
-            g->user_field[x][y+i] = 1;
+            g->user_field[x][y+i] = current_ship + 1;
             mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y+i), "x");
 
         }
@@ -191,7 +191,7 @@ static int ship_place(game *g, int x, int y, int orient, int size) {
         int flag = 1;
         for (int row = x-1; row <= x + size; row++) {
             for (int col = y-1; col <= y+1; col++) {
-                if (g->user_field[row][col] == 1)
+                if (g->user_field[row][col] != 0)
                     flag = 0;
             }
         }
@@ -207,7 +207,7 @@ static int ship_place(game *g, int x, int y, int orient, int size) {
         }
         
         for(int i = 0; i < size; i++){
-            g->user_field[x+i][y] = 1;  
+            g->user_field[x+i][y] = current_ship + 1;  
             mvwprintw(g->pl, FIELD_X(x+i), FIELD_Y(y), "x");
         }
     }
@@ -218,7 +218,7 @@ static int ship_place(game *g, int x, int y, int orient, int size) {
 void print_ships(game *g) {
     for (int i = 1; i <= 10; i++)
         for (int j = 1; j <= 10; j++)
-            if (g->user_field[i][j] == 1)
+            if (g->user_field[i][j] != 0)
                 mvwprintw(g->pl, FIELD_X(i), FIELD_Y(j), "x");
             else
                 mvwprintw(g->pl, FIELD_X(i), FIELD_Y(j), " ");
@@ -285,8 +285,11 @@ void place_ships(game *g) {
                 break;
 
             case 10: // enter
-                if (!ship_place(g, x, y, orientation, size[current_ship]))
+                if (!ship_place(g, x, y, orientation, size[current_ship], current_ship))
                     break;
+
+                g->user_ships[current_ship].size = size[current_ship];
+                g->user_ships[current_ship].hit_cells = 0;
 
                 current_ship++;
                 if(current_ship == 10)

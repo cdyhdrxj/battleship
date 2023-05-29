@@ -96,6 +96,7 @@ void shooting_loop(game *g) {
                     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), ".");
                 }
                 g->bot_shot[x][y] = 1;
+
                 break;
 
             case 'h':

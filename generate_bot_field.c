@@ -120,7 +120,6 @@ static void line(int field[][12]) {
 
 void fill_bot_ships(game *g) {
     for (int i = 0; i < 10; i++) {
-        g->bot_ships[i].num = i+1;
         g->bot_ships[i].size = 0;
         g->bot_ships[i].hit_cells = 0;
     }

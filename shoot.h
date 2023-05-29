@@ -3,6 +3,7 @@
 
 #include <ncursesw/ncurses.h>
 #include <ncursesw/panel.h>
+#include <unistd.h>
 #include "init.h"
 #include "place_ships.h"
 
