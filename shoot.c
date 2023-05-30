@@ -110,8 +110,10 @@ static int user_shooting(game *g) {
                     }
                 }
                 else {
-                    mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), ".");
-                    next_player = bot;
+                    if(g->bot_shot[x][y] == 0){
+                        mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), ".");
+                        next_player = bot;
+                    }
                 }
                 g->bot_shot[x][y] = 1;
                 print_shot(g);
