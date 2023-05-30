@@ -60,3 +60,9 @@ https://keldysh.ru/papers/2015/prep2015_98.pdf
 [Цикл игры](https://drive.google.com/file/d/1lQTqSxoYcaOeJtxoogk3KP7biA2I1MQB/view?usp=sharing)  
 [Алгоритм атаки бота](https://drive.google.com/file/d/10uOttfJH1LBf-EAFNUxcTdP1sc5coumd/view?usp=sharing)  
 [Алгоритм добивания корабля ботом](https://drive.google.com/file/d/1Td8JW8hohPZvj_SLwZqLl84aOLgycIb4/view?usp=sharing)  
+
+
+# Структурные модели программного проекта
+## Диаграммы
+Внутренняя структура приложения - [диаграмма модулей](https://drive.google.com/file/d/18MT0AFNZXaDJRNv2JfaNB70G4L88oSt-/view?usp=sharing)  
+[Используемые структуры/объекты данных](https://drive.google.com/file/d/1NnZ5r-fP2iEgDy3xMnPD7-7Fe6cCAPa8/view?usp=sharing)  
