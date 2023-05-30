@@ -57,6 +57,6 @@ https://keldysh.ru/papers/2015/prep2015_98.pdf
 [Общая структура приложения](https://drive.google.com/file/d/1o7abxml6xHxpvFFmxPjE56osIa4eNUco/view?usp=sharing)  
 [Расстановка кораблей пользователем](https://drive.google.com/file/d/13qDv51B6OR1enVYU2bYrpEAoAC0Mrybp/view?usp=sharing)  
 [Генерация поля бота](https://drive.google.com/file/d/16ogiyQDxrGThNgw_9Ubb3Xl94vrWeX5n/view?usp=sharing)  
-[Цикл игры](https://drive.google.com/file/d/1lQTqSxoYcaOeJtxoogk3KP7biA2I1MQB/view?usp=sharing) 
+[Цикл игры](https://drive.google.com/file/d/1lQTqSxoYcaOeJtxoogk3KP7biA2I1MQB/view?usp=sharing)  
 [Алгоритм атаки бота](https://drive.google.com/file/d/10uOttfJH1LBf-EAFNUxcTdP1sc5coumd/view?usp=sharing)  
 [Алгоритм добивания корабля ботом](https://drive.google.com/file/d/1Td8JW8hohPZvj_SLwZqLl84aOLgycIb4/view?usp=sharing)  
