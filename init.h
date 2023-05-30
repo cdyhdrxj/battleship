@@ -34,8 +34,8 @@ typedef struct __ship {
 
 typedef struct __shoot {
     int cells_left;
-    int battleship_search;
-    int diagonals;
+    int is_battleship_found;
+    int multicells_found;
     int is_destroyed;
     int current_ship;
     int poss_cell[4][2];

@@ -158,8 +158,8 @@ int shooting_loop(game *g){
             g->user_shot[i][j] = 0;
         }
 
-    g->bot_shoot.battleship_search = 0;
-    g->bot_shoot.diagonals = 0;
+    g->bot_shoot.is_battleship_found = 0;
+    g->bot_shoot.multicells_found = 0;
     g->bot_shoot.is_destroyed = 1;
     g->bot_shoot.cells_left = 20;
 

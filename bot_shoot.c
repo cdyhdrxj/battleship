@@ -9,15 +9,8 @@ static void make_buffer_zone(game *g) {
 
             for(int a = -1; a <= 1; a++)
                 for(int b = -1; b <= 1; b++)
-                    if(g->user_shot[i+a][j+b] == 0){
+                    if(g->user_shot[i+a][j+b] == 0)
                         g->user_shot[i+a][j+b] = 2;
-
-                        if((i+a+2) % 4 == (j+b) % 4)
-                            g->bot_shoot.battleship_search++;
-
-                        if((i+a) % 2 == (j+b) % 2)
-                            g->bot_shoot.diagonals++;
-                    }
         }
     }
 }
@@ -45,12 +38,6 @@ static int finish_ship(game *g){
     mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y)+1, "<");
     wrefresh(g->pl);
 
-    if(y % 4 == (x+2) % 4)
-        g->bot_shoot.battleship_search++;
-
-    if(x % 2 == y % 2)
-        g->bot_shoot.diagonals++;
-
     if(g->user_field[x][y] == 0){
         g->bot_shoot.poss_cell[i][0] = -1;
         g->bot_shoot.poss_cell[i][1] = -1;
@@ -65,6 +52,11 @@ static int finish_ship(game *g){
     g->user_ships[g->bot_shoot.current_ship].hit_cells++;
 
     if(g->user_ships[g->bot_shoot.current_ship].size == g->user_ships[g->bot_shoot.current_ship].hit_cells){
+        if(g->user_ships[g->bot_shoot.current_ship].size == 4)
+            g->bot_shoot.is_battleship_found = 1;
+
+        g->bot_shoot.multicells_found++;
+
         g->bot_shoot.is_destroyed = 1;
         make_buffer_zone(g);
         return next_player;
@@ -177,7 +169,7 @@ void bot_shooting(game *g) {
 
         int x, y;
 
-        if(g->bot_shoot.battleship_search < 24){
+        if(!g->bot_shoot.is_battleship_found){
             do {
                 x = 1 + rand() % 10;
                 y = 1 + rand() % 10;
@@ -191,17 +183,8 @@ void bot_shooting(game *g) {
                 g->user_shot[x][y] = -1;
                 next_player = user;
             }
-
-            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y)-1, ">");
-            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y)+1, "<");
-            wrefresh(g->pl);
-
-            g->bot_shoot.battleship_search++;
-            g->bot_shoot.diagonals++;
-            continue;
         }
-
-        if(g->bot_shoot.diagonals < 50){
+        else if(g->bot_shoot.multicells_found != 6){
             do {
                 x = 1 + rand() % 10;
                 y = 1 + rand() % 10;
@@ -215,27 +198,21 @@ void bot_shooting(game *g) {
                 g->user_shot[x][y] = -1;
                 next_player = user;
             }
-
-            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y)-1, ">");
-            mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y)+1, "<");
-            wrefresh(g->pl);
-
-            g->bot_shoot.diagonals++;
-            continue;
-        }
-
-        do {
-            x = 1 + rand() % 10;
-            y = 1 + rand() % 10;
-        } while(g->user_shot[x][y]);
-
-        if(g->user_field[x][y] > 0){
-            g->user_shot[x][y] = 1;
-            hit_ship(g, x, y);
         }
         else{
-            g->user_shot[x][y] = -1;
-            next_player = user;
+            do {
+                x = 1 + rand() % 10;
+                y = 1 + rand() % 10;
+            } while(g->user_shot[x][y]);
+
+            if(g->user_field[x][y] > 0){
+                g->user_shot[x][y] = 1;
+                hit_ship(g, x, y);
+            }
+            else{
+                g->user_shot[x][y] = -1;
+                next_player = user;
+            }
         }
 
         mvwprintw(g->pl, FIELD_X(x), FIELD_Y(y)-1, ">");
