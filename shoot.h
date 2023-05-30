@@ -6,7 +6,8 @@
 #include <unistd.h>
 #include "init.h"
 #include "place_ships.h"
+#include "bot_shoot.h"
 
-void shooting_loop(game *g);
+int shooting_loop(game *g);
 
 #endif /* SHOOT_H */

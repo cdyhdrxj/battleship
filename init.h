@@ -11,15 +11,19 @@
 #define FIELD_X(x) 2*(x)-1 
 #define FIELD_Y(y) 4*(y)-2
 
-#define MAIN_MSG    "Press h to get help, q to quit"
-#define ROTATE_MSG  "Can't rotate"
-#define MOVE_MSG    "Move this ship"
+#define MAIN_MSG    "Press h for help, q to quit"
+#define ROTATE_MSG  "Can't rotate (h for help, q to quit)"
+#define MOVE_MSG    "Move this ship (h for help, q to quit)"
 #define HELP_MSG    "Help (press q to quit, arrows to scroll)"
-#define TURN_MSG    "It's your turn"
-#define HIT_MSG     "Hit!"
-#define DESTROY_MSG "Destroyed!"
+#define BOT_MSG     "It's bot's turn (h for help, q to quit)"
+#define YOU_MSG     "It's your turn (h for help, q to quit)"
+#define HIT_MSG     "Hit! It's your turn (h for help, q to quit)"
+#define DESTROY_MSG "Destroyed! It's your turn (h for help, q to quit)"
 #define WIN_MSG     "You win! (press any key to quit)"
 #define LOSE_MSG    "You lose... (press any key to quit)"
+
+enum PLAYERS {user, bot};
+enum CURRENT_MSG {you, hit, destr};
 
 
 typedef struct __ship {
@@ -48,7 +52,8 @@ typedef struct _help {
 typedef struct _game {
     int user_field[12][12]; 
     int user_shot[12][12];
-    ship user_ships[10];    
+    ship user_ships[10];
+    int cells_left;    
 
     int bot_field[12][12];
     int bot_shot[12][12];

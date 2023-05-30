@@ -3,13 +3,11 @@
 #include "generate_bot_field.h"
 #include "shoot.h"
 #include "bot_shoot.h"
-#include <unistd.h>
 
 int main(){
     setlocale(LC_ALL, "");
     initscr();
     keypad(stdscr, TRUE);
-    //raw();
     noecho();
 
     game *g;
@@ -34,24 +32,33 @@ int main(){
     print_grid(g);
     init_help(g->h);
 
-    place_ships(g);
+    int need_to_quit = place_ships(g);
+    if(need_to_quit){
+        endwin();
+        return 0;
+    }
 
     gener_field(g->bot_field);
     fill_bot_ships(g);
 
-    shooting_loop(g);
+    int winner = shooting_loop(g);
 
-    g->bot_shoot.battleship_search = 0;
-    g->bot_shoot.diagonals = 0;
-    g->bot_shoot.is_destroyed = 1;
-    g->bot_shoot.cells_left = 20;
-
-    while(g->bot_shoot.cells_left > 0){
-        bot_shooting(g);
+    if(winner == -1){
+        endwin();
+        return 0;
     }
 
-    int c;
-    while((c = getch()) != 'q');
+    wmove(g->win, LINES - 1, 0);
+    wclrtoeol(g->win);
+    wattron(g->win, A_REVERSE);
+    if(winner == user)
+        mvwprintw(g->win, LINES - 1, 0, WIN_MSG);
+    else
+        mvwprintw(g->win, LINES - 1, 0, LOSE_MSG);
+    wattroff(g->win, A_REVERSE);
+    wrefresh(g->win);
+
+    getch();
 
     endwin();
 

@@ -8,7 +8,7 @@
 #include <locale.h>
 #include "init.h"
 
-void place_ships(game *g);
+int place_ships(game *g);
 void print_ships(game *g);
 
 

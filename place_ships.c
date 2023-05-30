@@ -237,7 +237,7 @@ static void print_current_ship(game *g, int x, int y, int orient, int size) {
 }
 
 
-void place_ships(game *g) {
+int place_ships(game *g) {
     keypad(g->pl, TRUE);
     curs_set(0);
 
@@ -312,7 +312,7 @@ void place_ships(game *g) {
                 break;
 
             case 'q':
-                return;
+                return 1;
 
             case KEY_RESIZE:
                 endwin();
@@ -327,7 +327,8 @@ void place_ships(game *g) {
             default:
                 break;
         }
-        
         wrefresh(g->pl);
     }
+
+    return 0;
 }
