@@ -1,15 +1,14 @@
 #ifndef PLACE_SHIPS_H
 #define PLACE_SHIPS_H
 
-#include <ncursesw/ncurses.h>
-#include <ncursesw/panel.h>
-#include <string.h>
-#include <stdlib.h>
-#include <locale.h>
+#include "battleship.h"
 #include "init.h"
+#include "main_loop.h"
 
+// Расстановка кораблей пользователем
 int place_ships(game *g);
-void print_ships(game *g);
 
+// Печатает корабли на поле пользователя
+void print_ships(game *g);
 
 #endif /* PLACE_SHIPS_H */

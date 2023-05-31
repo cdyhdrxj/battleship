@@ -1,7 +1,11 @@
 #include "generate_bot_field.h"
 
+/* bot_field[x][y] == 0 - нет корабля
+                   == i - в клетке расположен корабль под номером i (g->bot_ships[i-1])
+*/
 
-static void snake(int field[][12]){
+// Расстановка многопалубных кораблей "змейкой"
+static void snake(int field[][FIELD_SIZE + 2]){
     int a, b;
 
     if(rand() % 2)
@@ -37,15 +41,16 @@ static void snake(int field[][12]){
     }
 
     current_ship++;
-    field[10][1] = current_ship;
-    field[10][2] = current_ship;
+    field[FIELD_SIZE][1] = current_ship;
+    field[FIELD_SIZE][2] = current_ship;
     current_ship++;
-    field[1][10] = current_ship;
-    field[2][10] = current_ship;
+    field[1][FIELD_SIZE] = current_ship;
+    field[2][FIELD_SIZE] = current_ship;
 }
 
 
-static void line(int field[][12]) {
+// Расстановка многопалубных кораблей двумя параллельными линиями
+static void line(int field[][FIELD_SIZE + 2]) {
     int row1, row2;
     int a1, a2, b1, b2;
 
@@ -96,7 +101,7 @@ static void line(int field[][12]) {
 
     int current_ship = 1;
 
-    for(int j = 1; j <= 10; j++){
+    for(int j = 1; j <= FIELD_SIZE; j++){
         if(j == a1 || j == a2){
             current_ship++;
             continue;
@@ -107,7 +112,7 @@ static void line(int field[][12]) {
 
     current_ship++;
 
-    for(int j = 1; j <= 10; j++) {
+    for(int j = 1; j <= FIELD_SIZE; j++) {
         if(j == b1 || j == b2){
             current_ship++;
             continue;
@@ -118,15 +123,16 @@ static void line(int field[][12]) {
 }
 
 
+// По матрице поля бота формирует массив кораблей ships[]
 void fill_bot_ships(game *g) {
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < NUMBER_OF_SHIPS; i++) {
         g->bot_ships[i].size = 0;
         g->bot_ships[i].hit_cells = 0;
     }
 
 
-    for (int i = 0; i < 12; i++) {
-        for (int j = 0; j < 12; j++) {
+    for (int i = 0; i < FIELD_SIZE + 2; i++) {
+        for (int j = 0; j < FIELD_SIZE + 2; j++) {
             if (g->bot_field[i][j] == 0)
                 continue;
 
@@ -137,26 +143,28 @@ void fill_bot_ships(game *g) {
 }
 
 
-void gener_field(int field[][12]){
-    int f[12][12];
-    for(int i = 0; i < 12; i++)
-        for(int j = 0; j < 12; j++)
+// Генерирует поле бота
+void gener_field(int field[][FIELD_SIZE + 2]){
+    int f[FIELD_SIZE + 2][FIELD_SIZE + 2];
+    for(int i = 0; i < FIELD_SIZE + 2; i++)
+        for(int j = 0; j < FIELD_SIZE + 2; j++)
             f[i][j] = 0;
 
+    // Выбираем одну из стратегий расстановки
     srand(time(NULL));
-    int var = rand() % 2;
-    if(var)
+    if(rand() % 2)
         line(f);
     else
         snake(f);
 
-    for(int i = 7; i <= 10; i++){
+    // Рандомно выбираем координаты для катеров
+    for(int i = NUMBER_OF_MULTICELLS + 1; i <= NUMBER_OF_SHIPS; i++){
         int flag = 1;
         int x, y;
         while(flag){
             flag = 0;
-            x = 1 + rand() % 10;
-            y = 1 + rand() % 10;
+            x = 1 + rand() % FIELD_SIZE;
+            y = 1 + rand() % FIELD_SIZE;
 
             for(int j = x-1; j <= x+1; j++)
                 for(int k = y-1; k <= y+1; k++)
@@ -167,14 +175,13 @@ void gener_field(int field[][12]){
             f[x][y] = i;
         }
 
-    int d1 = (rand() % 2) * 11;
-    int d2 = (rand() % 2) * 11;
+    // Рандомно поворачиваем и зеркально отображаем получившееся поле
+    int d1 = (rand() % 2) * (FIELD_SIZE + 1);
+    int d2 = (rand() % 2) * (FIELD_SIZE + 1);
 
-    var = rand() % 2;
-
-    for(int i = 1; i <= 10; i++) {
-        for(int j = 1; j <= 10; j++) {
-            if(var)
+    for(int i = 1; i <= FIELD_SIZE; i++) {
+        for(int j = 1; j <= FIELD_SIZE; j++) {
+            if(rand() % 2)
                 field[i][j] = f[abs(d1 - i)][abs(d2 - j)];
             else
                 field[i][j] = f[abs(d1 - j)][abs(d2 - i)];           

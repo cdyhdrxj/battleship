@@ -1,11 +1,11 @@
-#include "shoot.h"
+#include "user_shoot.h"
 
 
-// название не очень
+// Отображает текущее состояние клетки на поле бота
 static void print_current_state(game *g, int x, int y) {
     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)-1, " ");
     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)+1, " ");
-    if (g->bot_shot[x][y] == 1) {
+    if (g->bot_shot[x][y] == shot) {
         if (g->bot_field[x][y] > 0)
             mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), "x");
         else
@@ -16,38 +16,48 @@ static void print_current_state(game *g, int x, int y) {
 }
 
 
+// Отображает состояние клеток на полях пользователя и бота
 static void print_shot(game *g) {
-    for (int i = 1; i <= 10; i++)
-        for (int j = 1; j <= 10; j++){
+    for (int i = 1; i <= FIELD_SIZE; i++)
+        for (int j = 1; j <= FIELD_SIZE; j++){
             print_current_state(g, i, j);
-            if(abs(g->user_shot[i][j]) == 1){
-                mvwprintw(g->pl, FIELD_X(i), FIELD_Y(j)-1, ">");
-                mvwprintw(g->pl, FIELD_X(i), FIELD_Y(j)+1, "<");
-                wrefresh(g->pl);
+            if(g->user_shot[i][j] == shot || g->user_shot[i][j] == miss){
+                mvwprintw(g->user, FIELD_X(i), FIELD_Y(j)-1, ">");
+                mvwprintw(g->user, FIELD_X(i), FIELD_Y(j)+1, "<");
+                wrefresh(g->user);
             }
         }
 }
 
 
+// Отображает текущую выбранную клетку
 static void print_current_cell(game *g, int x, int y) {
     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)-1, ">");
     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)+1, "<");
 }
 
 
-static int user_shooting(game *g) {
+// Ход пользователя
+// Возвращает 1, если нужно выйти из приложения, 0 иначе
+int user_shooting(game *g) {
+    // Кто ходит следующим
     int next_player = user;
-
+    // Координаты текущец выбранной клетки
     int x = 1, y = 1;
-
+    // Текущее сообщение
     int current_msg = you;
 
+    // Стреляем, пока не попадём мимо
     int c;
     while (next_player == user) {
         print_shot(g);
         print_current_cell(g, x, y);
         wrefresh(g->bot);
 
+        if(g->cells_left == 0)
+            return 0;
+
+        // Печатаем текущее сообщение
         wmove(g->win, LINES - 1, 0);
         wclrtoeol(g->win);
         wattron(g->win, A_REVERSE);
@@ -67,38 +77,39 @@ static int user_shooting(game *g) {
 
         c = getch();
         switch(c) {
-            case KEY_DOWN:
+            case KEY_DOWN: // Курсор вниз
                 print_current_state(g, x, y);
-                if (x < 10)
+                if (x < FIELD_SIZE)
                     x++;
                 print_current_cell(g, x, y);
                 break;
 
-            case KEY_UP:
+            case KEY_UP: // Курсор вверх
                 print_current_state(g, x, y);
                 if (x > 1)
                     x--;
                 print_current_cell(g, x, y);
                 break;
 
-            case KEY_LEFT:
+            case KEY_LEFT: // Курсор влево
                 print_current_state(g, x, y);
                 if (y > 1)
                     y--;
                 print_current_cell(g, x, y);
                 break;
 
-            case KEY_RIGHT:
+            case KEY_RIGHT: // Курсор вправо
                 print_current_state(g, x, y);
-                if (y < 10)
+                if (y < FIELD_SIZE)
                     y++;
                 print_current_cell(g, x, y);
                 break;
 
-            case 10: //enter
+            case 10: //enter - ударить
+                // Попали в корабль и ещё не ударяли в эту клетку
                 if (g->bot_field[x][y] > 0) {
                     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), "x");
-                    if (g->bot_shot[x][y] == 0){
+                    if (g->bot_shot[x][y] == not_shot){
                         int ship = g->bot_field[x][y] - 1;
                         g->bot_ships[ship].hit_cells++;
                         g->cells_left--;
@@ -109,81 +120,45 @@ static int user_shooting(game *g) {
                             current_msg = hit;
                     }
                 }
+                // Не попали в корабль
                 else {
-                    if(g->bot_shot[x][y] == 0){
+                    if(g->bot_shot[x][y] == not_shot){
                         mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y), ".");
                         next_player = bot;
                     }
                 }
-                g->bot_shot[x][y] = 1;
+                g->bot_shot[x][y] = shot;
                 print_shot(g);
+
                 break;
 
-            case 'h':
+            case 'h': // Вызвать справку
                 help_loop(g->h);
                 top_panel(g->pan);
                 update_panels();
                 doupdate();
                 print_grid(g);
-                print_ships(g); wrefresh(g->pl);
+                print_ships(g); wrefresh(g->user);
                 print_shot(g);
                 print_current_cell(g, x, y);
                 break;
 
-            case KEY_RESIZE:
+            case KEY_RESIZE: // Изменение размеров окна
                 endwin();
                 refresh();
                 wclear(g->win);
                 wrefresh(g->win);
                 print_grid(g);
-                print_ships(g); wrefresh(g->pl);
+                print_ships(g); wrefresh(g->user);
                 print_shot(g);
                 print_current_cell(g, x, y);
                 break;
 
-            case 'q':
+            case 'q': // Выйти из приложения
                 return 1;
         }
         wrefresh(g->bot);
     }
 
     return 0;
-}
-
-
-int shooting_loop(game *g){
-    for (int i = 0; i < 12; i++)
-        for (int j = 0; j < 12; j++){ 
-            g->bot_shot[i][j] = 0;
-            g->user_shot[i][j] = 0;
-        }
-
-    g->bot_shoot.is_battleship_found = 0;
-    g->bot_shoot.multicells_found = 0;
-    g->bot_shoot.is_destroyed = 1;
-    g->bot_shoot.cells_left = 20;
-
-    g->cells_left = 20;
-
-    int first_player = rand() % 2;
-    int need_to_quit = 0;
-
-    while(1){
-        if(first_player == user)
-            need_to_quit = user_shooting(g);
-
-        if(need_to_quit)
-            return -1;
-        
-        bot_shooting(g);
-
-        if(first_player == bot)
-            need_to_quit = user_shooting(g);
-
-        if(g->cells_left == 0)
-            return user;
-
-        if(g->bot_shoot.cells_left == 0)
-            return bot;
-    }
 }
