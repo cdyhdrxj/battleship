@@ -63,7 +63,7 @@ static void line(int field[][FIELD_SIZE + 2]) {
             row1 = 1;
             row2 = 10;
             break;
-        case 2:
+        default:
             row1 = 3;
             row2 = 1;
             break;
@@ -78,7 +78,7 @@ static void line(int field[][FIELD_SIZE + 2]) {
             a1 = 3;
             a2 = 8;
             break;
-        case 2:
+        default:
             a1 = 3;
             a2 = 6;
             break;
@@ -93,7 +93,7 @@ static void line(int field[][FIELD_SIZE + 2]) {
             b1 = 4;
             b2 = 7;
             break;
-        case 2:
+        default:
             b1 = 3;
             b2 = 7;
             break;

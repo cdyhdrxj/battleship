@@ -27,7 +27,7 @@ static void make_buffer_zone(game *g) {
 // Возвращает следующего игрока
 static int finish_ship(game *g){
     // Координаты клетки для удара
-    int x, y;
+    int x = -1, y = -1;
     // Кто ходит следующим
     int next_player = user;
 
@@ -79,7 +79,7 @@ static int finish_ship(game *g){
     }
 
     // Если не убили, обновляем массив клеток, в которые можно стрелять
-    int x_new, y_new;
+    int x_new = -1, y_new = -1;
 
     switch(i){
         case 0:
