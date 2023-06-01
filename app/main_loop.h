@@ -2,6 +2,7 @@
 #define MAIN_LOOP_H
 
 #include "battleship.h"
+#include "init.h"
 #include "place_ships.h"
 #include "generate_bot_field.h"
 #include "bot_shoot.h"
@@ -16,7 +17,5 @@ int shooting_loop(game *g);
 // Отображает справку в окне
 void print_help(help *h);
 
-// Цикл обработки событий при просмотре справки
-void help_loop(help *h);
 
 #endif /* MAIN_LOOP_H */

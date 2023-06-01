@@ -3,7 +3,6 @@
 
 #include "battleship.h"
 #include "init.h"
-#include "main_loop.h"
 
 // Расстановка кораблей пользователем
 int place_ships(game *g);

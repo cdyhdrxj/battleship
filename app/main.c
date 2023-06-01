@@ -9,10 +9,10 @@ int main(){
     game *g;
     g = (game *) malloc(sizeof(game));
     if (g == NULL)
-        return 0;
+        return 1;
 
     if(!init_game(g))
-        return 0;
+        return 1;
 
     // Запускаем игру
     start_game(g);

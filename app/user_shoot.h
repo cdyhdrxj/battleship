@@ -3,7 +3,6 @@
 
 #include "battleship.h"
 #include "init.h"
-#include "main_loop.h"
 #include "place_ships.h"
 
 // Ход пользователя
