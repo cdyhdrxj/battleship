@@ -220,7 +220,7 @@ void bot_shooting(game *g) {
             }
         }
         // Ищем остальные многопалубники
-        else if(g->bot_shoot.multicells_found != 6){
+        else if(g->bot_shoot.multicells_found != NUMBER_OF_MULTICELLS){
             do {
                 x = 1 + rand() % FIELD_SIZE;
                 y = 1 + rand() % FIELD_SIZE;

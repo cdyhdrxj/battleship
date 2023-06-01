@@ -126,7 +126,7 @@ int shooting_loop(game *g){
         }
 
     g->bot_shoot.is_battleship_found = 0;
-    g->bot_shoot.multicells_found = 1;
+    g->bot_shoot.multicells_found = 0;
     g->bot_shoot.is_destroyed = 1;
     g->bot_shoot.cells_left = NUMBER_OF_CELLS;
 
