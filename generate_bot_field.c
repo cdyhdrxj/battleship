@@ -179,9 +179,10 @@ void gener_field(int field[][FIELD_SIZE + 2]){
     int d1 = (rand() % 2) * (FIELD_SIZE + 1);
     int d2 = (rand() % 2) * (FIELD_SIZE + 1);
 
+    int var = rand() % 2;
     for(int i = 1; i <= FIELD_SIZE; i++) {
         for(int j = 1; j <= FIELD_SIZE; j++) {
-            if(rand() % 2)
+            if(var)
                 field[i][j] = f[abs(d1 - i)][abs(d2 - j)];
             else
                 field[i][j] = f[abs(d1 - j)][abs(d2 - i)];           
