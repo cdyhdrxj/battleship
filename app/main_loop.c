@@ -4,7 +4,6 @@
 // Цикл игры
 void start_game(game *g) {
     print_grid(g);
-    init_help(g->h);
 
     int need_to_quit = place_ships(g);
     if(need_to_quit)

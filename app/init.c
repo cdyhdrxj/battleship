@@ -17,6 +17,9 @@ int init_game(game *g) {
     g->h->pan = new_panel(g->h->win);
     g->h->win = newpad(LINES, COLS);
 
+    if(!init_help(g->h))
+        return 0;
+
     top_panel(g->pan);
     update_panels();
     doupdate();

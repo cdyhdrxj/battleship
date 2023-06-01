@@ -11,7 +11,8 @@ int main(){
     if (g == NULL)
         return 0;
 
-    init_game(g);
+    if(!init_game(g))
+        return 0;
 
     // Запускаем игру
     start_game(g);
