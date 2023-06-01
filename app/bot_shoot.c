@@ -94,6 +94,8 @@ static int finish_ship(game *g){
         case 3:
             x_new = x; y_new = y-1;
             break;
+        default:
+            break;
     }
 
     if(x_new == 0 || y_new == 0 || x_new == FIELD_SIZE+1 || y_new == FIELD_SIZE+1 || g->user_shot[x_new][y_new] != not_shot){

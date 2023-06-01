@@ -6,7 +6,7 @@
 
 // Расстановка многопалубных кораблей "змейкой"
 static void snake(int field[][FIELD_SIZE + 2]){
-    int a, b;
+    int a = 0, b = 0;
 
     if(rand() % 2)
         a = 4;
@@ -51,8 +51,8 @@ static void snake(int field[][FIELD_SIZE + 2]){
 
 // Расстановка многопалубных кораблей двумя параллельными линиями
 static void line(int field[][FIELD_SIZE + 2]) {
-    int row1, row2;
-    int a1, a2, b1, b2;
+    int row1 = 0, row2 = 0;
+    int a1 = 0, a2 = 0, b1 = 0, b2 = 0;
 
     switch(rand() % 3){
         case 0:
@@ -63,9 +63,11 @@ static void line(int field[][FIELD_SIZE + 2]) {
             row1 = 1;
             row2 = 10;
             break;
-        default:
+        case 2:
             row1 = 3;
             row2 = 1;
+            break;
+        default:
             break;
     }
 
@@ -78,9 +80,11 @@ static void line(int field[][FIELD_SIZE + 2]) {
             a1 = 3;
             a2 = 8;
             break;
-        default:
+        case 2:
             a1 = 3;
             a2 = 6;
+            break;
+        default:
             break;
     }
 
@@ -93,9 +97,11 @@ static void line(int field[][FIELD_SIZE + 2]) {
             b1 = 4;
             b2 = 7;
             break;
-        default:
+        case 2:
             b1 = 3;
             b2 = 7;
+            break;
+        default:
             break;
     }
 

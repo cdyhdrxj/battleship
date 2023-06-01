@@ -111,6 +111,8 @@ void help_loop(help *h) {
                 // Переходим к началу справки (TODO: лучше переходить к предыдущей последней)
                 mypadpos = 0;
                 break;
+            default:
+                break;
         }
         prefresh(h->win, mypadpos, 0, 0, 0, LINES-2, COLS);
     }

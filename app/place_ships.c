@@ -331,6 +331,9 @@ int place_ships(game *g) {
                 print_ships(g);
                 print_current_ship(g, x, y, orientation, size[current_ship]);
                 break;
+
+            default:
+                break;
         }
         wrefresh(g->user);
     }

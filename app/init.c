@@ -90,8 +90,10 @@ int init_help(help *h) {
     char s[LINE_MAX];
     int i = 0;
 
-    if (fgets(s, LINE_MAX, f) == NULL)
+    if (fgets(s, LINE_MAX, f) == NULL){
+        fclose(f);
         return 0;
+    }
 
     size_t size = strlen(s);
 
@@ -106,8 +108,10 @@ int init_help(help *h) {
         size = strlen(s);
 
         h->text = (char *)realloc(h->text, (i + size) * sizeof(char));
-        if (h->text == NULL)
+        if (h->text == NULL){
+            fclose(f);
             return 0;
+        }
 
         strncpy(h->text + i, s, size);
         i += size;

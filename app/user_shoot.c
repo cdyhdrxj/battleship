@@ -71,6 +71,8 @@ int user_shooting(game *g) {
             case destr:
                 mvwprintw(g->win, LINES - 1, 0, DESTROY_MSG);
                 break;
+            default:
+                break;
         }
         wattroff(g->win, A_REVERSE);
         wrefresh(g->win);
@@ -156,6 +158,9 @@ int user_shooting(game *g) {
 
             case 'q': // Выйти из приложения
                 return 1;
+
+            default:
+                break;
         }
         wrefresh(g->bot);
     }
