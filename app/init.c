@@ -98,8 +98,10 @@ int init_help(help *h) {
     size_t size = strlen(s);
 
     h->text = (char *)malloc((i + size) * sizeof(char));
-    if (h->text == NULL)
+    if (h->text == NULL){
+        fclose(f);
         return 0;
+    }
 
     strncpy(h->text + i, s, size);
     i += size;
@@ -117,8 +119,7 @@ int init_help(help *h) {
         i += size;
     }
 
-    if (fclose(f) != 0)
-        return 0;
+    fclose(f);
 
     return 1;
 }
