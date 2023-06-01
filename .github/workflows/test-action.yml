@@ -15,7 +15,6 @@ jobs:
 
       - name: Coveralls
         uses: coverallsapp/github-action@v1
-        run: coveralls -t ${{ secrets.coveralls_repo_token }} --root . -E ".*external.*" -E ".*tests.*"
 
 
   sonarcloud-check:
