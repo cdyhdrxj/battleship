@@ -14,8 +14,6 @@ QMAKE_CXXFLAGS += -fprofile-arcs -ftest-coverage
 QMAKE_CFLAGS += -fprofile-arcs -ftest-coverage
 LIBS += -lgcov
 
-HEADERS +=
-
 SOURCES += main.cpp
 
 INCLUDEPATH += ../app
