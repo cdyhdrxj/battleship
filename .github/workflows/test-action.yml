@@ -11,7 +11,7 @@ jobs:
       - run: sudo apt-get update -y && sudo apt-get install -y qt5-qmake qtbase5-dev qtchooser qtbase5-dev-tools
       - run: qmake
       - run: make
-      - run: ./tests/tests
+      - run: cd tests && ./tests && cd ..
 
       - name: Coveralls
         run: coveralls -t ${{ secrets.coveralls_repo_token }} --root . -E ".*external.*" -E ".*tests.*"
