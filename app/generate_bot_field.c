@@ -5,7 +5,7 @@
 */
 
 // Расстановка многопалубных кораблей "змейкой"
-static void snake(int field[][FIELD_SIZE + 2]){
+void snake(int field[][FIELD_SIZE + 2]){
     int a = 0, b = 0;
 
     if(rand() % 2)
@@ -50,7 +50,7 @@ static void snake(int field[][FIELD_SIZE + 2]){
 
 
 // Расстановка многопалубных кораблей двумя параллельными линиями
-static void line(int field[][FIELD_SIZE + 2]) {
+void line(int field[][FIELD_SIZE + 2]) {
     int row1 = 0, row2 = 0;
     int a1 = 0, a2 = 0, b1 = 0, b2 = 0;
 

@@ -5,7 +5,7 @@
 */
 
 // Опускает корабль на 1 клетку
-static void ship_down(game *g, int *x_gl, int *y_gl, int orient, int size) {
+void ship_down(game *g, int *x_gl, int *y_gl, int orient, int size) {
     int x = *x_gl;
     int y = *y_gl;
 
@@ -37,7 +37,7 @@ static void ship_down(game *g, int *x_gl, int *y_gl, int orient, int size) {
 
 
 // Поднимает корабль на 1 клетку
-static void ship_up(game *g, int *x_gl, int *y_gl, int orient, int size) {
+void ship_up(game *g, int *x_gl, int *y_gl, int orient, int size) {
     int x = *x_gl;
     int y = *y_gl;
 
@@ -69,7 +69,7 @@ static void ship_up(game *g, int *x_gl, int *y_gl, int orient, int size) {
 
 
 // Перемещает корабль влево на 1 клетку
-static void ship_left(game *g, int *x_gl, int *y_gl, int orient, int size) {
+void ship_left(game *g, int *x_gl, int *y_gl, int orient, int size) {
     int x = *x_gl;
     int y = *y_gl;
 
@@ -101,7 +101,7 @@ static void ship_left(game *g, int *x_gl, int *y_gl, int orient, int size) {
 
 
 // Перемещает корабль вправо на 1 клетку
-static void ship_right(game *g, int *x_gl, int *y_gl, int orient, int size) {
+void ship_right(game *g, int *x_gl, int *y_gl, int orient, int size) {
     int x = *x_gl;
     int y = *y_gl;
 
@@ -133,7 +133,7 @@ static void ship_right(game *g, int *x_gl, int *y_gl, int orient, int size) {
 
 
 // Поворачивает корабль
-static void ship_rotate(game *g, int x, int y, int *orient_gl, int size) {
+void ship_rotate(game *g, int x, int y, int *orient_gl, int size) {
     // Если получается повернуть корабль вокруг верхней (левой) клетки - поворачиваем:
     //  x x x x
     //  x        - функция умеет только поворот такого типа
@@ -178,7 +178,7 @@ static void ship_rotate(game *g, int x, int y, int *orient_gl, int size) {
 
 // Устанавливает корабль
 // Возвращает 1, если корабль можно установить, 0 иначе
-static int ship_place(game *g, int x, int y, int orient, int size, int current_ship) {
+int ship_place(game *g, int x, int y, int orient, int size, int current_ship) {
     // Проверяем, не граничит ли корабль с другими кораблями по сторонам или углам
     int x_max, y_max;
 
@@ -233,7 +233,7 @@ void print_ships(game *g) {
 
 
 // Печатает текущий устанавливаемый корабль
-static void print_current_ship(game *g, int x, int y, int orient, int size) {
+void print_current_ship(game *g, int x, int y, int orient, int size) {
     if (orient == horizontal) {
         for(int i = 0; i < size; i++)
             mvwprintw(g->user, FIELD_X(x), FIELD_Y(y+i), "o");

@@ -4,6 +4,12 @@
 #include "battleship.h"
 #include "init.h"
 
+// Расстановка многопалубных кораблей "змейкой"
+void snake(int field[][FIELD_SIZE + 2]);
+
+// Расстановка многопалубных кораблей двумя параллельными линиями
+void line(int field[][FIELD_SIZE + 2]);
+
 // Генерирует поле бота
 void gener_field(int field[][FIELD_SIZE + 2]);
 

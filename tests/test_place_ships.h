@@ -4,8 +4,8 @@
 #include <gtest/gtest.h>
 
 extern "C" {
+#include "init.h"
 #include "place_ships.h"
-#include "place_ships.c"
 }
 
 TEST(ship_down1, horiz1) {

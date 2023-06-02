@@ -1,3 +1,6 @@
+#ifndef INIT_C
+#define INIT_C
+
 #include "init.h"
 
 // Инициализация игры
@@ -129,7 +132,7 @@ int init_help(help *h) {
 
 
 // Возвращает количество строк text при заданной ширине окна cols
-static int get_rows(char *text, int cols) {
+int get_rows(char *text, int cols) {
     size_t size = strlen(text);
     int rows = 1, cur_line = 0;
 
@@ -228,3 +231,6 @@ void end_game(game *g) {
     free(g->h);
     free(g);
 }
+
+
+#endif /* INIT_C */

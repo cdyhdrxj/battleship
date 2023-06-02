@@ -8,7 +8,7 @@
 
 
 // Отмечает клетки вокруг убитых кораблей
-static void make_buffer_zone(game *g) {
+void make_buffer_zone(game *g) {
     for(int i = 1; i <= FIELD_SIZE; i++){
         for(int j = 1; j <= FIELD_SIZE; j++){
             if(g->user_shot[i][j] != shot)
@@ -25,7 +25,7 @@ static void make_buffer_zone(game *g) {
 
 // Добивает корабль
 // Возвращает следующего игрока
-static int finish_ship(game *g){
+int finish_ship(game *g){
     // Координаты клетки для удара
     int x = -1, y = -1;
     // Кто ходит следующим
@@ -118,8 +118,8 @@ static int finish_ship(game *g){
 }
 
 
-// Для впервые раненного корабля составляет массив клеток, в которых он может находится
-static void hit_ship(game *g, int x, int y) {
+// Для впервые раненного корабля составляет массив соседних клеток, в которых он может находится
+void hit_ship(game *g, int x, int y) {
     g->bot_shoot.cells_left--;
 
     g->bot_shoot.current_ship = g->user_field[x][y] - 1;

@@ -12,6 +12,9 @@ void print_grid(game *g);
 // Читает справку из файла, записывает в h->text
 int init_help(help *h);
 
+// Возвращает количество строк text при заданной ширине окна cols
+int get_rows(char *text, int cols);
+
 // Отображает справку в окне
 void print_help(help *h);
 

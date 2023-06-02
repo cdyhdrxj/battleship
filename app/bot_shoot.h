@@ -3,6 +3,16 @@
 
 #include "battleship.h"
 
+// Отмечает клетки вокруг убитых кораблей
+void make_buffer_zone(game *g);
+
+// Добивает корабль
+// Возвращает следующего игрока
+int finish_ship(game *g);
+
+// Для впервые раненного корабля составляет массив соседних клеток, в которых он может находится
+void hit_ship(game *g, int x, int y);
+
 // Ход бота
 void bot_shooting(game *g);
 

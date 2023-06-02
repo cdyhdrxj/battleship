@@ -3,6 +3,7 @@
 
 #include "test_init.h"
 #include "test_place_ships.h"
+#include "test_bot_shoot.h"
 
 int main(int argc, char *argv[])
 {

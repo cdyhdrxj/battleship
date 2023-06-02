@@ -2,7 +2,7 @@
 
 
 // Отображает текущее состояние клетки на поле бота
-static void print_current_state(game *g, int x, int y) {
+void print_current_state(game *g, int x, int y) {
     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)-1, " ");
     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)+1, " ");
     if (g->bot_shot[x][y] == shot) {
@@ -17,7 +17,7 @@ static void print_current_state(game *g, int x, int y) {
 
 
 // Отображает состояние клеток на полях пользователя и бота
-static void print_shot(game *g) {
+void print_shot(game *g) {
     for (int i = 1; i <= FIELD_SIZE; i++)
         for (int j = 1; j <= FIELD_SIZE; j++){
             print_current_state(g, i, j);
@@ -31,7 +31,7 @@ static void print_shot(game *g) {
 
 
 // Отображает текущую выбранную клетку
-static void print_current_cell(game *g, int x, int y) {
+void print_current_cell(game *g, int x, int y) {
     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)-1, ">");
     mvwprintw(g->bot, FIELD_X(x), FIELD_Y(y)+1, "<");
 }

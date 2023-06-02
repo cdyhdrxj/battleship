@@ -5,7 +5,6 @@
 
 extern "C" {
 #include "init.h"
-#include "init.c"
 }
 
 TEST(get_rows1, pos) {
