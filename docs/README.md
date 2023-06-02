@@ -1,3 +1,10 @@
+[![CI/CD GitHub Actions](https://github.com/cdyhdrxj/battleship/actions/workflows/test-action.yml/badge.svg)](https://github.com/cdyhdrxj/battleship/actions/workflows/test-action.yml)
+[![Coverage Status](https://coveralls.io/repos/github/cdyhdrxj/battleship/badge.svg?branch=main)](https://coveralls.io/github/cdyhdrxj/battleship?branch=main)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=cdyhdrxj_battleship&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=cdyhdrxj_battleship)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=cdyhdrxj_battleship&metric=bugs)](https://sonarcloud.io/summary/new_code?id=cdyhdrxj_battleship)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=cdyhdrxj_battleship&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=cdyhdrxj_battleship)
+
+
 # Морской бой
 ## Тематика программного проекта
 **Название проекта:** морской бой.
