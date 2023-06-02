@@ -23,6 +23,7 @@ SOURCES += main.cpp \
            ../app/user_shoot.c
 
 HEADERS += test_place_ships.h \
+           test_init.h \
            ../app/battleship.h \
            ../app/bot_shoot.h \
            ../app/generate_bot_field.h \
@@ -33,7 +34,8 @@ HEADERS += test_place_ships.h \
            
 
 INCLUDEPATH += ../external/fff \
-               ../app
+               ../app \
+               ../app/help.txt
 
 LIBS += -lgcov \
         -lncursesw \

@@ -1,0 +1,5 @@
+
+  Welcome to Battleship - terminal game against bot!
+
+  this is test help file
+  

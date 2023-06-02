@@ -20,8 +20,8 @@ TEST(ship_down1, horiz1) {
     int x = 5, y = 8;
     ship_down(g, &x, &y, 2, horizontal);
 
-    ASSERT_EQ(6, x);
-    ASSERT_EQ(8, y);
+    EXPECT_EQ(6, x);
+    EXPECT_EQ(8, y);
 
     end_game(g);
 }
@@ -38,8 +38,8 @@ TEST(ship_down2, horiz2) {
     int x = FIELD_SIZE, y = 3;
     ship_down(g, &x, &y, horizontal, 3);
 
-    ASSERT_EQ(FIELD_SIZE, x);
-    ASSERT_EQ(3, y);
+    EXPECT_EQ(FIELD_SIZE, x);
+    EXPECT_EQ(3, y);
 
     end_game(g);
 }
@@ -56,8 +56,8 @@ TEST(ship_down3, vertic1) {
     int x = 2, y = 10, size = 2;
     ship_down(g, &x, &y, vertical, size);
 
-    ASSERT_EQ(3, x);
-    ASSERT_EQ(10, y);
+    EXPECT_EQ(3, x);
+    EXPECT_EQ(10, y);
 
     end_game(g);
 }
@@ -75,8 +75,8 @@ TEST(ship_down4, vertic2) {
     int size = FIELD_SIZE + 1 - x;
     ship_down(g, &x, &y, vertical, size);
 
-    ASSERT_EQ(7, x);
-    ASSERT_EQ(3, y);
+    EXPECT_EQ(7, x);
+    EXPECT_EQ(3, y);
 
     end_game(g);
 }
@@ -93,8 +93,8 @@ TEST(ship_up1, horiz1) {
     int x = 5, y = 8;
     ship_up(g, &x, &y, 2, horizontal);
 
-    ASSERT_EQ(4, x);
-    ASSERT_EQ(8, y);
+    EXPECT_EQ(4, x);
+    EXPECT_EQ(8, y);
 
     end_game(g);
 }
@@ -111,8 +111,8 @@ TEST(ship_up2, horiz2) {
     int x = 1, y = 3;
     ship_up(g, &x, &y, horizontal, 3);
 
-    ASSERT_EQ(1, x);
-    ASSERT_EQ(3, y);
+    EXPECT_EQ(1, x);
+    EXPECT_EQ(3, y);
 
     end_game(g);
 }
@@ -129,8 +129,8 @@ TEST(ship_up3, vertic1) {
     int x = 8, y = 10, size = 2;
     ship_up(g, &x, &y, vertical, size);
 
-    ASSERT_EQ(7, x);
-    ASSERT_EQ(10, y);
+    EXPECT_EQ(7, x);
+    EXPECT_EQ(10, y);
 
     end_game(g);
 }
@@ -148,8 +148,8 @@ TEST(ship_up4, vertic2) {
     int size = 4;
     ship_up(g, &x, &y, vertical, size);
 
-    ASSERT_EQ(1, x);
-    ASSERT_EQ(3, y);
+    EXPECT_EQ(1, x);
+    EXPECT_EQ(3, y);
 
     end_game(g);
 }
@@ -166,8 +166,8 @@ TEST(ship_left1, horiz1) {
     int x = 5, y = 8;
     ship_left(g, &x, &y, 2, horizontal);
 
-    ASSERT_EQ(5, x);
-    ASSERT_EQ(7, y);
+    EXPECT_EQ(5, x);
+    EXPECT_EQ(7, y);
 
     end_game(g);
 }
@@ -184,8 +184,8 @@ TEST(ship_left2, horiz2) {
     int x = 1, y = 1;
     ship_left(g, &x, &y, horizontal, 3);
 
-    ASSERT_EQ(1, x);
-    ASSERT_EQ(1, y);
+    EXPECT_EQ(1, x);
+    EXPECT_EQ(1, y);
 
     end_game(g);
 }
@@ -202,8 +202,8 @@ TEST(ship_left3, vertic1) {
     int x = 8, y = 10, size = 2;
     ship_left(g, &x, &y, vertical, size);
 
-    ASSERT_EQ(8, x);
-    ASSERT_EQ(9, y);
+    EXPECT_EQ(8, x);
+    EXPECT_EQ(9, y);
 
     end_game(g);
 }
@@ -221,8 +221,8 @@ TEST(ship_left4, vertic2) {
     int size = 4;
     ship_left(g, &x, &y, vertical, size);
 
-    ASSERT_EQ(6, x);
-    ASSERT_EQ(1, y);
+    EXPECT_EQ(6, x);
+    EXPECT_EQ(1, y);
 
     end_game(g);
 }
@@ -239,8 +239,8 @@ TEST(ship_right1, horiz1) {
     int x = 2, y = 5;
     ship_right(g, &x, &y, 2, horizontal);
 
-    ASSERT_EQ(2, x);
-    ASSERT_EQ(6, y);
+    EXPECT_EQ(2, x);
+    EXPECT_EQ(6, y);
 
     end_game(g);
 }
@@ -258,8 +258,8 @@ TEST(ship_right2, horiz2) {
     int size = FIELD_SIZE + 1 - y;
     ship_right(g, &x, &y, horizontal, size);
 
-    ASSERT_EQ(8, x);
-    ASSERT_EQ(8, y);
+    EXPECT_EQ(8, x);
+    EXPECT_EQ(8, y);
 
     end_game(g);
 }
@@ -276,8 +276,8 @@ TEST(ship_right3, vertic1) {
     int x = 8, y = 5, size = 2;
     ship_right(g, &x, &y, vertical, size);
 
-    ASSERT_EQ(8, x);
-    ASSERT_EQ(6, y);
+    EXPECT_EQ(8, x);
+    EXPECT_EQ(6, y);
 
     end_game(g);
 }
@@ -295,8 +295,8 @@ TEST(ship_right4, vertic2) {
     int size = 4;
     ship_right(g, &x, &y, vertical, size);
 
-    ASSERT_EQ(5, x);
-    ASSERT_EQ(10, y);
+    EXPECT_EQ(5, x);
+    EXPECT_EQ(10, y);
 
     end_game(g);
 }
@@ -315,7 +315,7 @@ TEST(ship_rotate1, horiz1) {
     int orient = horizontal;
     ship_rotate(g, x, y, &orient, size);
 
-    ASSERT_EQ(vertical, orient);
+    EXPECT_EQ(vertical, orient);
 
     end_game(g);
 }
@@ -334,7 +334,7 @@ TEST(ship_rotate2, horiz2) {
     int orient = horizontal;
     ship_rotate(g, x, y, &orient, size);
 
-    ASSERT_EQ(horizontal, orient);
+    EXPECT_EQ(horizontal, orient);
 
     end_game(g);
 }
@@ -353,7 +353,7 @@ TEST(ship_rotate3, vertic1) {
     int orient = vertical;
     ship_rotate(g, x, y, &orient, size);
 
-    ASSERT_EQ(horizontal, orient);
+    EXPECT_EQ(horizontal, orient);
 
     end_game(g);
 }
@@ -372,7 +372,7 @@ TEST(ship_rotate4, vertic2) {
     int orient = vertical;
     ship_rotate(g, x, y, &orient, size);
 
-    ASSERT_EQ(vertical, orient);
+    EXPECT_EQ(vertical, orient);
 
     end_game(g);
 }
@@ -390,14 +390,14 @@ TEST(ship_place1, horiz1) {
     int size = 4;
     int orient = horizontal;
     int number = 1;
-    ASSERT_EQ(1, ship_place(g, x, y, orient, size, number));
+    EXPECT_EQ(1, ship_place(g, x, y, orient, size, number));
 
     for(int i = 0; i < FIELD_SIZE + 2; i++)
         for(int j = 0; j < FIELD_SIZE + 2; j++){
             if(i == x && j >= y && j < y + size)
-                ASSERT_EQ(number+1, g->user_field[i][j]);
+                EXPECT_EQ(number+1, g->user_field[i][j]);
             else
-                ASSERT_EQ(0, g->user_field[i][j]);
+                EXPECT_EQ(0, g->user_field[i][j]);
         }
 
     end_game(g);
@@ -430,11 +430,11 @@ TEST(ship_place2, horiz2) {
     int size = 4;
     int orient = horizontal;
     int number = 1;
-    ASSERT_EQ(0, ship_place(g, x, y, orient, size, number));
+    EXPECT_EQ(0, ship_place(g, x, y, orient, size, number));
 
     for(int i = 0; i < FIELD_SIZE + 2; i++)
         for(int j = 0; j < FIELD_SIZE + 2; j++)
-                ASSERT_EQ(field[i][j], g->user_field[i][j]);
+                EXPECT_EQ(field[i][j], g->user_field[i][j]);
 
     end_game(g);
 }
@@ -452,14 +452,14 @@ TEST(ship_place3, vertic1) {
     int size = 3;
     int orient = vertical;
     int number = 1;
-    ASSERT_EQ(1, ship_place(g, x, y, orient, size, number));
+    EXPECT_EQ(1, ship_place(g, x, y, orient, size, number));
 
     for(int i = 0; i < FIELD_SIZE + 2; i++)
         for(int j = 0; j < FIELD_SIZE + 2; j++){
             if(i >= x && i < x + size && j == y)
-                ASSERT_EQ(number+1, g->user_field[i][j]);
+                EXPECT_EQ(number+1, g->user_field[i][j]);
             else
-                ASSERT_EQ(0, g->user_field[i][j]);
+                EXPECT_EQ(0, g->user_field[i][j]);
         }
 
     end_game(g);
@@ -492,11 +492,11 @@ TEST(ship_place4, vertic2) {
     int size = 2;
     int orient = vertical;
     int number = 3;
-    ASSERT_EQ(0, ship_place(g, x, y, orient, size, number));
+    EXPECT_EQ(0, ship_place(g, x, y, orient, size, number));
 
     for(int i = 0; i < FIELD_SIZE + 2; i++)
         for(int j = 0; j < FIELD_SIZE + 2; j++){
-                ASSERT_EQ(field[i][j], g->user_field[i][j]);
+                EXPECT_EQ(field[i][j], g->user_field[i][j]);
         }
 
     end_game(g);

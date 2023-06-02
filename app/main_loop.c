@@ -31,18 +31,6 @@ void start_game(game *g) {
 }
 
 
-// Отображает справку в окне
-void print_help(help *h) {
-    wclear(h->win);
-    mvwprintw(h->win, 0, 0, "%s", h->text);
-
-    attron(A_REVERSE);
-    mvprintw(LINES - 1, 0, "%s", HELP_MSG);
-    attroff(A_REVERSE);
-    refresh();
-}
-
-
 // Цикл перестрелки
 int shooting_loop(game *g){
     for (int i = 0; i < FIELD_SIZE + 2; i++)

@@ -10,6 +10,7 @@
 #include <unistd.h>
 #include <time.h>
 
+#define HELP_FILE "help.txt"
 #define LINE_MAX 200         // Максимальная длина строки при чтении из файла
 
 #define FIELD_X(x) 2*(x)-1   // Переводят координаты точки на поле в

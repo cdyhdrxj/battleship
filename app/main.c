@@ -11,11 +11,9 @@ int main(){
     if (g == NULL)
         return 1;
 
-    if(!init_game(g))
-        return 1;
+    if(init_game(g))
+        start_game(g); // Запускаем игру
 
-    // Запускаем игру
-    start_game(g);
 
     // Освобождаем память, заканчиваем работу с ncurses
     end_game(g);

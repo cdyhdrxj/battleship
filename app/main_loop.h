@@ -14,8 +14,4 @@ void start_game(game *g);
 // Цикл перестрелки
 int shooting_loop(game *g);
 
-// Отображает справку в окне
-void print_help(help *h);
-
-
 #endif /* MAIN_LOOP_H */

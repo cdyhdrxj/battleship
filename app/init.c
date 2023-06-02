@@ -86,7 +86,7 @@ void print_grid(game *g) {
 // Возвращает 0, если возникла ошибка, 1 иначе
 int init_help(help *h) {
     FILE *f;
-    f = fopen("help.txt", "r");
+    f = fopen(HELP_FILE, "r");
     if (f == NULL)
         return 0;
 
@@ -150,6 +150,17 @@ static int get_rows(char *text, int cols) {
     return rows;
 }
 
+
+// Отображает справку в окне
+void print_help(help *h) {
+    wclear(h->win);
+    mvwprintw(h->win, 0, 0, "%s", h->text);
+
+    attron(A_REVERSE);
+    mvprintw(LINES - 1, 0, "%s", HELP_MSG);
+    attroff(A_REVERSE);
+    refresh();
+}
 
 // Цикл обработки событий при просмотре справки
 void help_loop(help *h) {
