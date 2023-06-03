@@ -5,15 +5,15 @@
 */
 
 // Расстановка многопалубных кораблей "змейкой"
-void snake(int field[][FIELD_SIZE + 2]){
-    int a = 0, b = 0;
+void snake(int field[][FIELD_SIZE + 2], int var1, int var2){
+    int a, b;
 
-    if(rand() % 2)
+    if(var1 % 2)
         a = 4;
     else
         a = 5;
 
-    if(rand() % 2)
+    if(var2 % 2)
         b = 5;
     else
         b = 6;
@@ -50,11 +50,11 @@ void snake(int field[][FIELD_SIZE + 2]){
 
 
 // Расстановка многопалубных кораблей двумя параллельными линиями
-void line(int field[][FIELD_SIZE + 2]) {
-    int row1 = 0, row2 = 0;
-    int a1 = 0, a2 = 0, b1 = 0, b2 = 0;
+void line(int field[][FIELD_SIZE + 2], int var1, int var2, int var3) {
+    int row1, row2;
+    int a1, a2, b1, b2;
 
-    switch(rand() % 3){
+    switch(var1 % 3){
         case 0:
             row1 = 1;
             row2 = 3;
@@ -63,32 +63,24 @@ void line(int field[][FIELD_SIZE + 2]) {
             row1 = 1;
             row2 = 10;
             break;
-        case 2:
+        default:
             row1 = 3;
             row2 = 1;
             break;
-        default:
-            break;
     }
 
-    switch(rand() % 3){
+    switch(var2 % 2){
         case 0:
             a1 = 5;
             a2 = 8;
             break;
-        case 1:
+        default:
             a1 = 3;
             a2 = 8;
             break;
-        case 2:
-            a1 = 3;
-            a2 = 6;
-            break;
-        default:
-            break;
     }
 
-    switch(rand() % 3){
+    switch(var3 % 3){
         case 0:
             b1 = 4;
             b2 = 8;
@@ -97,11 +89,9 @@ void line(int field[][FIELD_SIZE + 2]) {
             b1 = 4;
             b2 = 7;
             break;
-        case 2:
+        default:
             b1 = 3;
             b2 = 7;
-            break;
-        default:
             break;
     }
 
@@ -150,7 +140,7 @@ void fill_bot_ships(game *g) {
 
 
 // Генерирует поле бота
-void gener_field(int field[][FIELD_SIZE + 2]){
+void gener_field(int field[][FIELD_SIZE + 2], int var1, int var2, int var3) {
     int f[FIELD_SIZE + 2][FIELD_SIZE + 2];
     for(int i = 0; i < FIELD_SIZE + 2; i++)
         for(int j = 0; j < FIELD_SIZE + 2; j++)
@@ -159,9 +149,9 @@ void gener_field(int field[][FIELD_SIZE + 2]){
     // Выбираем одну из стратегий расстановки
     srand(time(NULL));
     if(rand() % 2)
-        line(f);
+        line(f, rand() % 3, rand() % 2, rand() % 3);
     else
-        snake(f);
+        snake(f, rand() % 2, rand() % 2);
 
     // Рандомно выбираем координаты для катеров
     for(int i = NUMBER_OF_MULTICELLS + 1; i <= NUMBER_OF_SHIPS; i++){
@@ -176,16 +166,16 @@ void gener_field(int field[][FIELD_SIZE + 2]){
                 for(int k = y-1; k <= y+1; k++)
                      if(f[j][k] > 0)
                         flag = 1;
-            }
-
-            f[x][y] = i;
         }
 
-    // Рандомно поворачиваем и зеркально отображаем получившееся поле
-    int d1 = (rand() % 2) * (FIELD_SIZE + 1);
-    int d2 = (rand() % 2) * (FIELD_SIZE + 1);
+            f[x][y] = i;
+    }
 
-    int var = rand() % 2;
+    // Рандомно поворачиваем и зеркально отображаем получившееся поле
+    int d1 = (var1 % 2) * (FIELD_SIZE + 1);
+    int d2 = (var2 % 2) * (FIELD_SIZE + 1);
+
+    int var = var3 % 2;
     for(int i = 1; i <= FIELD_SIZE; i++) {
         for(int j = 1; j <= FIELD_SIZE; j++) {
             if(var)

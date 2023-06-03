@@ -1,9 +1,10 @@
 #include <gtest/gtest.h>
 #include <fff.h>
 
+#include "test_bot_shoot.h"
+#include "test_generate_bot_field.h"
 #include "test_init.h"
 #include "test_place_ships.h"
-#include "test_bot_shoot.h"
 
 int main(int argc, char *argv[])
 {

@@ -9,7 +9,7 @@ void start_game(game *g) {
     if(need_to_quit)
         return;
 
-    gener_field(g->bot_field);
+    gener_field(g->bot_field, rand() % 3, rand() % 2, rand() % 3);
     fill_bot_ships(g);
 
     int winner = shooting_loop(g);

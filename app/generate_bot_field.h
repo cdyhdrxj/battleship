@@ -5,13 +5,13 @@
 #include "init.h"
 
 // Расстановка многопалубных кораблей "змейкой"
-void snake(int field[][FIELD_SIZE + 2]);
+void snake(int field[][FIELD_SIZE + 2], int var1, int var2);
 
 // Расстановка многопалубных кораблей двумя параллельными линиями
-void line(int field[][FIELD_SIZE + 2]);
+void line(int field[][FIELD_SIZE + 2], int var1, int var2, int var3);
 
 // Генерирует поле бота
-void gener_field(int field[][FIELD_SIZE + 2]);
+void gener_field(int field[][FIELD_SIZE + 2], int var1, int var2, int var3);
 
 // По матрице поля бота формирует массив кораблей
 void fill_bot_ships(game *g);
