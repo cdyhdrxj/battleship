@@ -118,25 +118,6 @@ void line(int field[][FIELD_SIZE + 2], int var1, int var2, int var3) {
     }
 }
 
-// Расстановка однопалубных кораблей
-void place_submarines(int field[][FIELD_SIZE + 2]) {
-    for(int i = NUMBER_OF_MULTICELLS + 1; i <= NUMBER_OF_SHIPS; i++){
-        int flag = 1;
-        int x, y;
-        while(flag){
-            flag = 0;
-            x = 1 + rand() % FIELD_SIZE;
-            y = 1 + rand() % FIELD_SIZE;
-
-            for(int j = x-1; j <= x+1; j++)
-                for(int k = y-1; k <= y+1; k++)
-                     if(field[j][k] > 0)
-                        flag = 1;
-        }
-        field[x][y] = i;
-    }
-}
-
 // Вращает и зеркально отображает поле
 void rotate_field(int field[][FIELD_SIZE + 2], int var1, int var2, int var3) {
     int f[FIELD_SIZE + 2][FIELD_SIZE + 2];
