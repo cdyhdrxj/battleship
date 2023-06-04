@@ -24,8 +24,10 @@ SOURCES += main.cpp \
 
 HEADERS += test_bot_shoot.h \
            test_generate_bot_field.h \
-           test_place_ships.h \
            test_init.h \
+           test_main_loop.h \
+           test_place_ships.h \
+           test_user_shoot.h \
            ../app/battleship.h \
            ../app/bot_shoot.h \
            ../app/generate_bot_field.h \

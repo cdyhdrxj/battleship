@@ -9,10 +9,10 @@ void start_game(game *g) {
     if(need_to_quit)
         return;
 
-    gener_field(g->bot_field, rand() % 3, rand() % 2, rand() % 3);
+    gener_field(g->bot_field);
     fill_bot_ships(g);
 
-    int winner = shooting_loop(g);
+    int winner = shooting_loop(g, rand() % 2);
     if(winner == -1)
         return;
 
@@ -32,7 +32,7 @@ void start_game(game *g) {
 
 
 // Цикл перестрелки
-int shooting_loop(game *g){
+int shooting_loop(game *g, int first_player){
     for (int i = 0; i < FIELD_SIZE + 2; i++)
         for (int j = 0; j < FIELD_SIZE + 2; j++){ 
             g->bot_shot[i][j] = not_shot;
@@ -46,7 +46,7 @@ int shooting_loop(game *g){
 
     g->cells_left = NUMBER_OF_CELLS;
 
-    int first_player = rand() % 2;
+    first_player = first_player % 2;
     int need_to_quit = 0;
 
     while(1){

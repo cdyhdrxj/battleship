@@ -118,6 +118,46 @@ void line(int field[][FIELD_SIZE + 2], int var1, int var2, int var3) {
     }
 }
 
+// Расстановка однопалубных кораблей
+void place_submarines(int field[][FIELD_SIZE + 2]) {
+    for(int i = NUMBER_OF_MULTICELLS + 1; i <= NUMBER_OF_SHIPS; i++){
+        int flag = 1;
+        int x, y;
+        while(flag){
+            flag = 0;
+            x = 1 + rand() % FIELD_SIZE;
+            y = 1 + rand() % FIELD_SIZE;
+
+            for(int j = x-1; j <= x+1; j++)
+                for(int k = y-1; k <= y+1; k++)
+                     if(field[j][k] > 0)
+                        flag = 1;
+        }
+        field[x][y] = i;
+    }
+}
+
+// Вращает и зеркально отображает поле
+void rotate_field(int field[][FIELD_SIZE + 2], int var1, int var2, int var3) {
+    int f[FIELD_SIZE + 2][FIELD_SIZE + 2];
+    for(int i = 0; i < FIELD_SIZE + 2; i++)
+        for(int j = 0; j < FIELD_SIZE + 2; j++)
+            f[i][j] = field[i][j];
+
+    int d1 = (var1 % 2) * (FIELD_SIZE + 1);
+    int d2 = (var2 % 2) * (FIELD_SIZE + 1);
+
+    int var = var3 % 2;
+    for(int i = 0; i < FIELD_SIZE + 2; i++) {
+        for(int j = 0; j < FIELD_SIZE + 2; j++) {
+            if(var)
+                field[i][j] = f[abs(d1 - i)][abs(d2 - j)];
+            else
+                field[i][j] = f[abs(d1 - j)][abs(d2 - i)];
+        }
+    }
+}
+
 
 // По матрице поля бота формирует массив кораблей ships[]
 void fill_bot_ships(game *g) {
@@ -140,18 +180,17 @@ void fill_bot_ships(game *g) {
 
 
 // Генерирует поле бота
-void gener_field(int field[][FIELD_SIZE + 2], int var1, int var2, int var3) {
-    int f[FIELD_SIZE + 2][FIELD_SIZE + 2];
+void gener_field(int field[][FIELD_SIZE + 2]) {
     for(int i = 0; i < FIELD_SIZE + 2; i++)
         for(int j = 0; j < FIELD_SIZE + 2; j++)
-            f[i][j] = 0;
+            field[i][j] = 0;
 
     // Выбираем одну из стратегий расстановки
     srand(time(NULL));
     if(rand() % 2)
-        line(f, rand() % 3, rand() % 2, rand() % 3);
+        line(field, rand() % 3, rand() % 2, rand() % 3);
     else
-        snake(f, rand() % 2, rand() % 2);
+        snake(field, rand() % 2, rand() % 2);
 
     // Рандомно выбираем координаты для катеров
     for(int i = NUMBER_OF_MULTICELLS + 1; i <= NUMBER_OF_SHIPS; i++){
@@ -164,24 +203,12 @@ void gener_field(int field[][FIELD_SIZE + 2], int var1, int var2, int var3) {
 
             for(int j = x-1; j <= x+1; j++)
                 for(int k = y-1; k <= y+1; k++)
-                     if(f[j][k] > 0)
+                     if(field[j][k] > 0)
                         flag = 1;
         }
-
-            f[x][y] = i;
+        field[x][y] = i;
     }
 
     // Рандомно поворачиваем и зеркально отображаем получившееся поле
-    int d1 = (var1 % 2) * (FIELD_SIZE + 1);
-    int d2 = (var2 % 2) * (FIELD_SIZE + 1);
-
-    int var = var3 % 2;
-    for(int i = 1; i <= FIELD_SIZE; i++) {
-        for(int j = 1; j <= FIELD_SIZE; j++) {
-            if(var)
-                field[i][j] = f[abs(d1 - i)][abs(d2 - j)];
-            else
-                field[i][j] = f[abs(d1 - j)][abs(d2 - i)];           
-        }
-    }
+    rotate_field(field, rand() % 2, rand() % 2, rand() % 2);
 }

@@ -12,6 +12,6 @@
 void start_game(game *g);
 
 // Цикл перестрелки
-int shooting_loop(game *g);
+int shooting_loop(game *g, int first_player);
 
 #endif /* MAIN_LOOP_H */

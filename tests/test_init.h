@@ -58,6 +58,7 @@ TEST(init_help1, pos) {
 
     fclose(f);
 
+    free(h->text);
     free(h);
 }
 
