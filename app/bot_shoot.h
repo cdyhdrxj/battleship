@@ -14,6 +14,7 @@ int finish_ship(game *g);
 void hit_ship(game *g, int x, int y);
 
 // Ход бота
+__attribute((weak)) // для тестирования (наверное, не должно быть в исходном коде)
 void bot_shooting(game *g);
 
 #endif /* BOT_SHOOT_H */

@@ -15,6 +15,7 @@ void print_shot(game *g);
 void print_current_cell(game *g, int x, int y);
 
 // Ход пользователя
+__attribute((weak)) // для тестирования (наверное, не должно быть в исходном коде)
 int user_shooting(game *g);
 
 #endif /* USER_SHOOT_H */

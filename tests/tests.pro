@@ -34,11 +34,12 @@ HEADERS += test_bot_shoot.h \
            ../app/init.h \
            ../app/main_loop.h \
            ../app/place_ships.h \
-           ../app/user_shoot.h
+           ../app/user_shoot.h \
+           ../external/fff/fff.h
            
 
-INCLUDEPATH += ../external/fff \
-               ../app
+INCLUDEPATH += ../app \
+               ../external/fff
 
 LIBS += -lgcov \
         -lncursesw \
