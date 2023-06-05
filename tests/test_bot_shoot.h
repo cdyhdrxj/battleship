@@ -280,7 +280,6 @@ TEST(finish_ship1, pos) {
     end_game(g);
 }
 
-// ТУТ ЕЩЁ MAKE_BUFFER_ZONE
 TEST(finish_ship2, pos) {
     game *g;
     g = (game *) malloc(sizeof(game));
@@ -320,12 +319,13 @@ TEST(finish_ship2, pos) {
 }
 
 TEST(finish_ship3, pos){
-    int res[4][2] = {{3, 5}, {-1, -1}, {6, 5}, {-1, -1}};
+    int res[4][2] = {{-1, -1}, {-1, -1}, {6, 5}, {-1, -1}};
 
     game *g;
     g = (game *) malloc(sizeof(game));
     init_game(g);
 
+    g->user_shot[3][5] = buffer;
     g->user_field[4][5] = 3;
     g->user_shot[4][5] = not_shot;
 
