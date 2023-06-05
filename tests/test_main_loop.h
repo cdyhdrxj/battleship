@@ -29,7 +29,7 @@ TEST(shooting_loop1, pos) {
     RESET_FAKE(bot_shooting);
     RESET_FAKE(user_shooting);
 
-    int user_return_vals[3] = {0, 0, -1};
+    int user_return_vals[3] = {0, 0, 1};
     SET_RETURN_SEQ(user_shooting, user_return_vals, 3);
 
     game *g;
@@ -49,7 +49,7 @@ TEST(shooting_loop2, pos) {
     RESET_FAKE(bot_shooting);
     RESET_FAKE(user_shooting);
 
-    int user_return_vals[3] = {0, 0, -1};
+    int user_return_vals[3] = {0, 0, 1};
     SET_RETURN_SEQ(user_shooting, user_return_vals, 3);
 
     game *g;
