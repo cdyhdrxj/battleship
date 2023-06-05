@@ -3,14 +3,13 @@
 
 #include <ncursesw/ncurses.h>
 #include <ncursesw/panel.h>
-#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <locale.h>
 #include <unistd.h>
 #include <time.h>
 
-#define HELP_FILE "help.txt"
+#define HELP_FILE "help.txt" // Файл справки
 #define LINE_MAX 200         // Максимальная длина строки при чтении из файла
 
 #define FIELD_X(x) 2*(x)-1   // Переводят координаты точки на поле в
